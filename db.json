@@ -1,0 +1,154 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "username": "user1",
+        "password": "pass1",
+        "email": "user1@example.com",
+        "role": "customer"
+      },
+      {
+        "id": 2,
+        "username": "admin",
+        "password": "adminpass",
+        "email": "admin@example.com",
+        "role": "admin"
+      }
+    ],
+    "categories": [
+      {
+        "id": 1,
+        "name": "Electronics"
+      },
+      {
+        "id": 2,
+        "name": "Books"
+      }
+    ],
+    "products": [
+        {
+          "id": 1,
+          "name": "Laptop Haute Performance",
+          "description": "Un laptop puissant pour tous vos besoins informatiques",
+          "price": 1200.99,
+          "categoryId": 1
+        },
+        {
+          "id": 2,
+          "name": "Roman d'Aventure",
+          "description": "Un livre captivant qui vous tiendra en haleine",
+          "price": 15.99,
+          "categoryId": 2
+        },
+        {
+          "id": 3,
+          "name": "Smartphone dernière génération",
+          "description": "Un smartphone rapide et élégant avec la dernière technologie",
+          "price": 800.50,
+          "categoryId": 1
+        },
+        {
+          "id": 4,
+          "name": "Casque Audio Bluetooth",
+          "description": "Casque audio sans fil avec qualité sonore exceptionnelle",
+          "price": 250.00,
+          "categoryId": 1
+        },
+        {
+          "id": 5,
+          "name": "Livre de Cuisine",
+          "description": "Découvrez de nouvelles recettes avec ce livre de cuisine",
+          "price": 20.00,
+          "categoryId": 2
+        },
+        {
+          "id": 6,
+          "name": "Caméra de Surveillance",
+          "description": "Caméra de haute qualité pour une sécurité accrue",
+          "price": 180.75,
+          "categoryId": 1
+        },
+        {
+          "id": 7,
+          "name": "Enceinte Portable",
+          "description": "Enceinte portable pour écouter votre musique partout",
+          "price": 99.99,
+          "categoryId": 1
+        },
+        {
+          "id": 8,
+          "name": "Roman Policier",
+          "description": "Plongez dans une enquête palpitante avec ce thriller",
+          "price": 12.99,
+          "categoryId": 2
+        }
+      ],
+    "orders": [
+      {
+        "id": 1,
+        "userId": 1,
+        "date": "2023-12-15",
+        "total": 1014.98
+      }
+    ],
+    "orderDetails": [
+      {
+        "id": 1,
+        "orderId": 1,
+        "productId": 1,
+        "quantity": 1,
+        "price": 999.99
+      },
+      {
+        "id": 2,
+        "orderId": 1,
+        "productId": 2,
+        "quantity": 1,
+        "price": 14.99
+      }
+    ],
+    "reviews": [
+        {
+            "id": 1,
+            "productId": 1,
+            "rating": 4,
+            "comment": "Très bon produit!"
+        },
+        {
+            "id": 1,
+            "productId": 1,
+            "rating": 4,
+            "comment": "Très bon produit, performance exceptionnelle."
+        },
+        {
+            "id": 2,
+            "productId": 1,
+            "rating": 5,
+            "comment": "Excellent! A dépassé mes attentes."
+        },
+        {
+            "id": 3,
+            "productId": 2,
+            "rating": 3,
+            "comment": "Bon livre, mais certains chapitres étaient un peu longs."
+        },
+        {
+            "id": 4,
+            "productId": 2,
+            "rating": 4,
+            "comment": "Histoire captivante, recommande fortement."
+        },
+        {
+            "id": 5,
+            "productId": 3,
+            "rating": 2,
+            "comment": "Pas terrible, l'autonomie de la batterie est décevante."
+        },
+        {
+            "id": 6,
+            "productId": 3,
+            "rating": 5,
+            "comment": "Meilleur achat de l'année, je suis très satisfait."
+        }
+    ]
+  }

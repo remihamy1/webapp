@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webapp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="navbar" style="width: 110%;">
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#produits">Produits</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div id="cart-container">
+            <h2>Panier</h2>
+            <div id="cart-items"></div>
+        </div>
+        <div id="login-container">
+            <input type="text" id="username" placeholder="Nom d'utilisateur">
+            <input type="password" id="password" placeholder="Mot de passe">
+            <button onclick="login()">Connexion</button>
+        </div>
+        
+        <div id="welcome-message" style="display: none;">
+            <h2>Bienvenue, <span id="user-name"></span>!</h2>
+            <button onclick="logout()">Déconnexion</button>
+        </div>
+        
+    </nav>
+
+    <div id="container">
+        <aside id="sidebar">
+            <h2>Categories</h2>
+            <div id="categories"></div>
+        </aside>
+        <main id="main-content" style="position: relative; top: -100px;">
+            <div id="search-container">
+                <input type="text" id="search-box" placeholder="Rechercher un produit...">
+                <button onclick="searchProducts()">Recherche</button>
+            </div>
+            <div id="breadcrumb"></div>
+            <section id="produits">
+                <h2>Produits</h2>
+                <div id="liste-produits">
+                </div>
+            </section>
+            <div id="product-detail-modal" class="modal" style="width: 200%;">
+                <div class="modal-content">
+                    <span class="close-button" onclick="closeModal()">&times;</span>
+                    <h2 id="product-detail-name"></h2>
+                    <p id="product-detail-description"></p>
+                    <p id="product-detail-price"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <footer style="position: relative; top: 50px;">
+        <p>Version du site : 1.0.0</p>
+    </footer>    
+</body>
+</html>
