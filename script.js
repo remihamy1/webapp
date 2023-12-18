@@ -16,7 +16,7 @@ function loadCategories() {
     });
 }
 
-const itemsPerPage = 5; // Set the number of products to display per page
+const itemsPerPage = 9; // Set the number of products to display per page
 let currentPage = 1; // Current page
 
 function loadProducts(categoryId) {
