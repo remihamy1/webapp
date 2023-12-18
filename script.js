@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:4000`;
+const baseUrl = 'https://magnificent-hummingbird-b1c42a.netlify.app:4000';
 
 function loadCategories() {
     fetch(`${baseUrl}/categories`)
