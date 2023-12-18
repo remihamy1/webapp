@@ -1,4 +1,4 @@
-const baseUrl = `${process.env.HOST}:4000` || 'http://locahost:4000'; // URL de votre JSON Server
+const baseUrl = 'http://localhost:3000'; // URL de votre JSON Server
 
 function loadCategories() {
     fetch(`${baseUrl}/categories`)
@@ -150,4 +150,17 @@ function showProductDetail(productId) {
 
 function closeModal() {
     document.getElementById('product-detail-modal').style.display = 'block';
+}
+
+function filteredProducts(){
+    const searchPrix = document.getElementById('maxPrice').value.toLowerCase();
+    const searchNote = document.getElementById('minRating').value.toLowerCase();
+
+    fetch(`${baseUrl}/products`)
+        .then(response => response.json())
+        .then(products => {
+            const filteredProducts = products.filter(product => product.price < searchPrix);
+            displayProducts(filteredProducts);
+        });
+    
 }
