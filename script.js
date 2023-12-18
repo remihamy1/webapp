@@ -17,26 +17,28 @@ function loadCategories() {
 }
 
 function loadProducts(categoryId) {
-    fetch(`${baseUrl}/products`)
+    fetch(`${baseUrl}/products/`)
     .then(response => response.json())
     .then(products => {
         const productsDiv = document.getElementById('liste-produits');
         productsDiv.innerHTML = ''; // Nettoyer les anciens produits
         products.forEach(product => {
-            fetch(`${baseUrl}/reviews?productId=${product.id}`)
-                .then(response => response.json())
-                .then(reviews => {
-                    const productDiv = document.createElement('div');
-                    productDiv.className = 'product-item';
-                    productDiv.innerHTML = `
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <p class="product-price">${product.price} €</p>
-                        <div class="product-reviews">${generateReviewSummary(reviews)}</div>
-                    `;
-                    productDiv.onclick = () => showProductDetail(product.id);
-                    productsDiv.appendChild(productDiv);
-                });
+            if (product.categoryId === categoryId) {
+                fetch(`${baseUrl}/reviews?productId=${product.id}`)
+                    .then(response => response.json())
+                    .then(reviews => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product-item';
+                        productDiv.innerHTML = `
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <p class="product-price">${product.price} €</p>
+                            <div class="product-reviews">${generateReviewSummary(reviews)}</div>
+                        `;
+                        productDiv.onclick = () => showProductDetail(product.id);
+                        productsDiv.appendChild(productDiv);
+                    });
+            };
         });
     });
     fetch(`${baseUrl}/categories/1`)
