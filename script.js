@@ -117,6 +117,11 @@ function login() {
         });
 }
 
+function isLoggedIn() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    return user !== null; // Renvoie true si un utilisateur est connecté, sinon false
+}
+
 function updateLoginState() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     if (user) {
