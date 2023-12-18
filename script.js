@@ -109,7 +109,7 @@ function login() {
         .then(response => response.json())
         .then(users => {
             if (users.length > 0) {
-                sessionStorage.setItem('user', JSON.stringify({ username: 'unknown' }));
+                sessionStorage.setItem('user', JSON.stringify({ username: users[0].username }));
                 updateLoginState();
             } else {
                 alert("Échec de la connexion.");
