@@ -160,5 +160,5 @@ function showProductDetail(productId) {
 }
 
 function closeModal() {
-    document.getElementById('product-detail-modal').style.display = 'block';
+    document.getElementById('product-detail-modal').style.display = 'none';
 }
