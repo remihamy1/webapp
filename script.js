@@ -169,7 +169,7 @@ function submitContactForm(event) {
     if (!firstname || !lastname || !email || !subject || !message || !emailPattern.test(email))
         event.preventDefault(); // Empêche l'envoi du formulaire si les conditions ne sont pas remplies
     
-    alert('Votre demande a été soumise avec succès.');
+    showAlert('Votre demande a été soumise avec succès.');
 }
 
 function showContactForm() {
@@ -205,6 +205,19 @@ function showContactForm() {
             console.error('Erreur lors de la récupération des commandes :', error);
         });
     }
+}
+
+function showAlert(message) {
+    const alert = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
+
+    alertMessage.textContent = message;
+    alert.style.display = 'block';
+}
+
+function closeAlert() {
+    const alert = document.getElementById('custom-alert');
+    alert.style.display = 'none';
 }
 
 function closeModal() {
