@@ -6,7 +6,8 @@ body {
 }
 footer {
     text-align: center;
-    padding: 20px;
+    padding-top: 10px; /*Erreur liée au padding. Remplacement de padding 20px par padding-top 10px et padding-bottom 10px*/
+    padding-bottom: 10px;
     background-color: #f2f2f2;
     position: absolute;
     bottom: 0;
