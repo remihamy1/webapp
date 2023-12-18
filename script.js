@@ -1,269 +1,307 @@
-const baseUrl = 'http://localhost:3000'; // URL de votre JSON Server
+const baseUrl = "http://localhost:3000"; // URL de votre JSON Server
+
+function generateProductDiv(product, reviews) {
+  const productDiv = document.createElement("div");
+  productDiv.className = "product-item";
+  productDiv.innerHTML = `
+      <h3 class="product-name">${product.name}</h3>
+      <p class="product-description">${product.description}</p>
+      <p class="product-price">${product.price} €</p>
+      <div class="product-reviews">${generateReviewSummary(reviews)}</div>
+    `;
+  productDiv.onclick = () => showProductDetail(product.id);
+  return productDiv;
+}
 
 //Load initial des produits sur la page principal
 loadProductsInitial();
 
 function loadCategories() {
-    fetch(`${baseUrl}/categories`)
-        .then(response => response.json())
-        .then(categories => {
-            const categoriesDiv = document.getElementById('categories');
-            categoriesDiv.innerHTML = '';
-            categories.forEach(category => {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'category';
-                categoryDiv.textContent = category.name;
-                categoryDiv.onclick = () => loadProducts(category.id);
-                categoriesDiv.appendChild(categoryDiv);
-            });
-        });
-}
-
-function loadProductsInitial() {
-    fetch(`${baseUrl}/products`)
-    .then(response => response.json())
-    .then(products => {
-        const productsDiv = document.getElementById('liste-produits');
-        productsDiv.innerHTML = ''; // Nettoyer les anciens produits
-        products.forEach(product => {
-            fetch(`${baseUrl}/reviews?productId=${product.id}`)
-                .then(response => response.json())
-                .then(reviews => {
-                    const productDiv = document.createElement('div');
-                    productDiv.className = 'product-item';
-                    productDiv.innerHTML = `
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <p class="product-price">${product.price} €</p>
-                        <div class="product-reviews">${generateReviewSummary(reviews)}</div>
-                    `;
-                    productDiv.onclick = () => showProductDetail(product.id);
-                    productsDiv.appendChild(productDiv);
-                });
-        });
+  fetch(`${baseUrl}/categories`)
+    .then((response) => response.json())
+    .then((categories) => {
+      const categoriesDiv = document.getElementById("categories");
+      categoriesDiv.innerHTML = "";
+      categories.forEach((category) => {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.className = "category";
+        categoryDiv.textContent = category.name;
+        categoryDiv.onclick = () => loadProducts(category.id);
+        categoriesDiv.appendChild(categoryDiv);
+      });
     });
-    fetch(`${baseUrl}/categories/1`)
-    .then(response => response.json())
-    .then(category => updateBreadcrumb(category.name));
 }
 
 function loadProducts(categoryId) {
-    fetch(`${baseUrl}/products`)
-    .then(response => response.json())
-    .then(products => {
-        const productsDiv = document.getElementById('liste-produits');
-        productsDiv.innerHTML = ''; // Nettoyer les anciens produits
-        products.forEach(product => {
-            if (product.categoryId === categoryId) {
-                fetch(`${baseUrl}/reviews?productId=${product.id}`)
-                    .then(response => response.json())
-                    .then(reviews => {
-                        const productDiv = document.createElement('div');
-                        productDiv.className = 'product-item';
-                        productDiv.innerHTML = `
-                            <h3 class="product-name">${product.name}</h3>
-                            <p class="product-description">${product.description}</p>
-                            <p class="product-price">${product.price} €</p>
-                            <div class="product-reviews">${generateReviewSummary(reviews)}</div>
-                        `;
-                        productDiv.onclick = () => showProductDetail(product.id);
-                        productsDiv.appendChild(productDiv);
-                    });
-            };
-        });
+  fetch(`${baseUrl}/products`)
+    .then((response) => response.json())
+    .then((products) => {
+      const productsDiv = document.getElementById("liste-produits");
+      productsDiv.innerHTML = ""; // Clear old products
+      products.forEach((product) => {
+        fetch(`${baseUrl}/reviews?productId=${product.id}`)
+          .then((response) => response.json())
+          .then((reviews) => {
+            const productDiv = generateProductDiv(product, reviews);
+            productsDiv.appendChild(productDiv);
+          });
+      });
     });
-    fetch(`${baseUrl}/categories/1`)
-    .then(response => response.json())
-    .then(category => updateBreadcrumb(category.name));
+  fetch(`${baseUrl}/categories/1`)
+    .then((response) => response.json())
+    .then((category) => updateBreadcrumb(category.name));
+}
+
+function loadProducts(categoryId) {
+  fetch(`${baseUrl}/products`)
+    .then((response) => response.json())
+    .then((products) => {
+      const productsDiv = document.getElementById("liste-produits");
+      productsDiv.innerHTML = ""; // Nettoyer les anciens produits
+      products.forEach((product) => {
+        if (product.categoryId === categoryId) {
+          fetch(`${baseUrl}/reviews?productId=${product.id}`)
+            .then((response) => response.json())
+            .then((reviews) => {
+              const productDiv = document.createElement("div");
+              productDiv.className = "product-item";
+              productDiv.innerHTML = `
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-description">${
+                              product.description
+                            }</p>
+                            <p class="product-price">${product.price} €</p>
+                            <div class="product-reviews">${generateReviewSummary(
+                              reviews
+                            )}</div>
+                        `;
+              productDiv.onclick = () => showProductDetail(product.id);
+              productsDiv.appendChild(productDiv);
+            });
+        }
+      });
+    });
+  fetch(`${baseUrl}/categories/1`)
+    .then((response) => response.json())
+    .then((category) => updateBreadcrumb(category.name));
 }
 
 function generateReviewSummary(reviews) {
-    if (reviews.length === 0) return 'Pas d\'avis pour ce produit.';
-    const averageRating = reviews.reduce((acc, review) => acc + review.rating, 1) / (reviews.length - 1);
-    return `Note moyenne : ${averageRating.toFixed(1)} (${reviews.length} avis)`;
+  if (reviews.length === 0) return "Pas d'avis pour ce produit.";
+  const averageRating =
+    reviews.reduce((acc, review) => acc + review.rating, 1) /
+    (reviews.length - 1);
+  return `Note moyenne : ${averageRating.toFixed(1)} (${reviews.length} avis)`;
 }
 
 function updateBreadcrumb(categoryName) {
-    const breadcrumbDiv = document.getElementById('breadcrumb');
-    breadcrumbDiv.innerHTML = `<span class="breadcrumb-item">Accueil</span> / <span class="breadcrumb-item">${categoryName}</span>`;
+  const breadcrumbDiv = document.getElementById("breadcrumb");
+  breadcrumbDiv.innerHTML = `<span class="breadcrumb-item">Accueil</span> / <span class="breadcrumb-item">${categoryName}</span>`;
 }
 function searchProducts() {
-    const searchText = document.getElementById('search-box').value.toLowerCase();
-    fetch(`${baseUrl}/products`)
-        .then(response => response.json())
-        .then(products => {
-            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchText));
-            displayProducts(filteredProducts);
-        });
-}
-function displayProducts(products) {
-    const productsDiv = document.getElementById('liste-produits');
-    productsDiv.innerHTML = '';
-    products.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.className = 'product-item';
-        productDiv.innerHTML = `
-            <h3 class="product-name">${product.name}</h3>
-            <p class="product-description">${product.description}</p>
-            <p class="product-price">${product.price} €</p>
-        `;
-        productDiv.onclick = () => showProductDetail(product.id); // Ajout de l'événement onclick
-        productsDiv.appendChild(productDiv);
+  const searchText = document.getElementById("search-box").value.toLowerCase();
+  fetch(`${baseUrl}/products`)
+    .then((response) => response.json())
+    .then((products) => {
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchText)
+      );
+
+      const productsDiv = document.getElementById("liste-produits");
+      productsDiv.innerHTML = "";
+      const fetchPromises = filteredProducts.map((product) => {
+        return fetch(`${baseUrl}/reviews?productId=${product.id}`)
+          .then((response) => response.json())
+          .then((reviews) => {
+            const productDiv = generateProductDiv(product, reviews);
+            productsDiv.appendChild(productDiv);
+          });
+      });
+      Promise.all(fetchPromises).then(() => {});
     });
+}
+
+function displayProducts(products) {
+  const productsDiv = document.getElementById("liste-produits");
+  productsDiv.innerHTML = "";
+  products.forEach((product) => {
+    const productDiv = generateProductDiv(product, []);
+    productsDiv.appendChild(productDiv);
+  });
 }
 loadCategories();
 
 let cart = [];
 
 function addToCart(productId) {
-    fetch(`${baseUrl}/products/${productId}`)
-        .then(response => response.json())
-        .then(product => {
-            cart.push(product);
-            displayCart();
-        });
-}
-
-function displayCart() {
-    const cartDiv = document.getElementById('cart-items');
-    cartDiv.innerHTML = '';
-    cart.forEach(product => {
-        const cartItemDiv = document.createElement('div');
-        cartItemDiv.innerHTML = `${product.name} - ${product.price} €`;
-        cartDiv.appendChild(cartItemDiv);
+  fetch(`${baseUrl}/products/${productId}`)
+    .then((response) => response.json())
+    .then((product) => {
+      cart.push(product);
+      displayCart();
     });
 }
 
+function displayCart() {
+  const cartDiv = document.getElementById("cart-items");
+  cartDiv.innerHTML = "";
+  cart.forEach((product) => {
+    const cartItemDiv = document.createElement("div");
+    cartItemDiv.innerHTML = `${product.name} - ${product.price} €`;
+    cartDiv.appendChild(cartItemDiv);
+  });
+}
+
 function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-    if (!validatePassword(password)) {
-        alert("Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.");
-        return;
-    }
+  if (!validatePassword(password)) {
+    alert(
+      "Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial."
+    );
+    return;
+  }
 
-    fetch(`${baseUrl}/users?username=${username}&password=${password}`)
-        .then(response => response.json())
-        .then(users => {
-            if (users.length > 0) {
-                let currentUser = users[0];
+  fetch(`${baseUrl}/users?username=${username}&password=${password}`)
+    .then((response) => response.json())
+    .then((users) => {
+      if (users.length > 0) {
+        let currentUser = users[0];
 
-                sessionStorage.setItem('user', JSON.stringify({ username: username, id: currentUser.id }));
-                updateLoginState();
-            } else {
-                alert("Échec de la connexion.");
-            }
-        });
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({ username: username, id: currentUser.id })
+        );
+        updateLoginState();
+      } else {
+        alert("Échec de la connexion.");
+      }
+    });
 }
 
 function getCurrentUser() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    return user; // Renvoie true si un utilisateur est connecté, sinon false
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  return user; // Renvoie true si un utilisateur est connecté, sinon false
 }
 
 function validatePassword(password) {
-    // Au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial
-    var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(password);
+  // Au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial
+  var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return regex.test(password);
 }
 
 function updateLoginState() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    if (user) {
-        document.getElementById('login-container').style.display = 'none';
-        document.getElementById('welcome-message').style.display = 'block';
-        document.getElementById('user-name').textContent = user.username;
-    } else {
-        document.getElementById('login-container').style.display = 'block';
-        document.getElementById('welcome-message').style.display = 'none';
-    }
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  if (user) {
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("welcome-message").style.display = "block";
+    document.getElementById("user-name").textContent = user.username;
+  } else {
+    document.getElementById("login-container").style.display = "block";
+    document.getElementById("welcome-message").style.display = "none";
+  }
 }
 
 function logout() {
-    sessionStorage.removeItem('user');
-    updateLoginState();
+  sessionStorage.removeItem("user");
+  updateLoginState();
 }
 
 // Appel initial pour vérifier l'état de la session
 updateLoginState();
 
 function showProductDetail(productId) {
-    fetch(`${baseUrl}/products/${productId}`)
-        .then(response => response.json())
-        .then(product => {
-            document.getElementById('product-detail-name').textContent = "Nom du produit incorrect";
-            document.getElementById('product-detail-description').textContent = "Description incorrecte";
-            document.getElementById('product-detail-price').textContent = `${product.price} €`;
-            document.getElementById('product-detail-modal').style.display = 'block';
-        });
+  fetch(`${baseUrl}/products/${productId}`)
+    .then((response) => response.json())
+    .then((product) => {
+      document.getElementById("product-detail-name").textContent =
+        "Nom du produit incorrect";
+      document.getElementById("product-detail-description").textContent =
+        "Description incorrecte";
+      document.getElementById(
+        "product-detail-price"
+      ).textContent = `${product.price} €`;
+      document.getElementById("product-detail-modal").style.display = "block";
+    });
 }
 
 function submitContactForm(event) {
-    const firstname = document.getElementById('firstname').value;
-    const lastname = document.getElementById('lastname').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const orderNumber = document.getElementById('order-number') ? document.getElementById('order-number').value : null; // Récupération du numéro de commande si présent
-    const message = document.getElementById('message').value;
+  const firstname = document.getElementById("firstname").value;
+  const lastname = document.getElementById("lastname").value;
+  const email = document.getElementById("email").value;
+  const subject = document.getElementById("subject").value;
+  const orderNumber = document.getElementById("order-number")
+    ? document.getElementById("order-number").value
+    : null; // Récupération du numéro de commande si présent
+  const message = document.getElementById("message").value;
 
-    // Expression régulière pour valider l'email
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Expression régulière pour valider l'email
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!firstname || !lastname || !email || !subject || !message || !emailPattern.test(email))
-        event.preventDefault(); // Empêche l'envoi du formulaire si les conditions ne sont pas remplies
-    
-    showAlert('Votre demande a été soumise avec succès.');
+  if (
+    !firstname ||
+    !lastname ||
+    !email ||
+    !subject ||
+    !message ||
+    !emailPattern.test(email)
+  )
+    event.preventDefault(); // Empêche l'envoi du formulaire si les conditions ne sont pas remplies
+
+  showAlert("Votre demande a été soumise avec succès.");
 }
 
 function showContactForm() {
-    const showContactFormButton = document.getElementById('show-contact-form-button');
-    const contactForm = document.getElementById('contact-form');
+  const showContactFormButton = document.getElementById(
+    "show-contact-form-button"
+  );
+  const contactForm = document.getElementById("contact-form");
 
-    contactForm.style.display = "block";
-    showContactFormButton.style.display = "none";
-    if(getCurrentUser() != null) {
-        let orderNumberField = document.getElementById('order-number-field');
+  contactForm.style.display = "block";
+  showContactFormButton.style.display = "none";
+  if (getCurrentUser() != null) {
+    let orderNumberField = document.getElementById("order-number-field");
 
-        orderNumberField.style.display = "block";
+    orderNumberField.style.display = "block";
 
-        let currentUser = getCurrentUser();
+    let currentUser = getCurrentUser();
 
-        fetch(`${baseUrl}/users/${currentUser.id}/orders`)
-        .then(response => response.json())
-        .then(orders => {
-            let orderNumberSelect = document.getElementById('order-number');
+    fetch(`${baseUrl}/users/${currentUser.id}/orders`)
+      .then((response) => response.json())
+      .then((orders) => {
+        let orderNumberSelect = document.getElementById("order-number");
 
-            // Efface toutes les options existantes
-            orderNumberSelect.innerHTML = '';
+        // Efface toutes les options existantes
+        orderNumberSelect.innerHTML = "";
 
-            // Ajoute une option pour chaque commande
-            orders.forEach(order => {
-                let option = document.createElement('option');
-                option.value = order.id; // Assure-toi que "orderNumber" est le champ approprié dans tes données d'ordre
-                option.textContent = `Commande ${order.id}`;
-                orderNumberSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Erreur lors de la récupération des commandes :', error);
+        // Ajoute une option pour chaque commande
+        orders.forEach((order) => {
+          let option = document.createElement("option");
+          option.value = order.id; // Assure-toi que "orderNumber" est le champ approprié dans tes données d'ordre
+          option.textContent = `Commande ${order.id}`;
+          orderNumberSelect.appendChild(option);
         });
-    }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des commandes :", error);
+      });
+  }
 }
 
 function showAlert(message) {
-    const alert = document.getElementById('custom-alert');
-    const alertMessage = document.getElementById('alert-message');
+  const alert = document.getElementById("custom-alert");
+  const alertMessage = document.getElementById("alert-message");
 
-    alertMessage.textContent = message;
-    alert.style.display = 'block';
+  alertMessage.textContent = message;
+  alert.style.display = "block";
 }
 
 function closeAlert() {
-    const alert = document.getElementById('custom-alert');
-    alert.style.display = 'none';
+  const alert = document.getElementById("custom-alert");
+  alert.style.display = "none";
 }
 
 function closeModal() {
-    document.getElementById('product-detail-modal').style.display = 'none';
+  document.getElementById("product-detail-modal").style.display = "none";
 }
