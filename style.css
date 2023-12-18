@@ -149,6 +149,43 @@ footer p {
     width: 80%;
 }
 
+/* Style de l'alert */
+.alert {
+    display: none; /* Initialement cachée */
+    position: fixed; /* Position fixée pour l'alert */
+    top: 50%; /* Centrage vertical */
+    left: 50%; /* Centrage horizontal */
+    transform: translate(-50%, -50%); /* Centrage absolu */
+    background-color: #fff; /* Couleur de fond */
+    border: 1px solid #ccc; /* Bordure */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+    padding: 20px; /* Espacement intérieur */
+    max-width: 400px; /* Largeur maximale */
+}
+
+/* Style pour le bouton de fermeture */
+.alert-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #888;
+}
+
+/* Style pour le contenu de la alert */
+.alert-content {
+    margin-top: 20px; /* Espacement du haut */
+}
+
+/* Style pour le message */
+.alert-message {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
 .close-button {
     color: #aaa;
     float: right;
