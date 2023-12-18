@@ -119,11 +119,6 @@ function login() {
         });
 }
 
-function isLoggedIn() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    return user !== null; // Renvoie true si un utilisateur est connecté, sinon false
-}
-
 function getCurrentUser() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user; // Renvoie true si un utilisateur est connecté, sinon false
@@ -183,7 +178,7 @@ function showContactForm() {
 
     contactForm.style.display = "block";
     showContactFormButton.style.display = "none";
-    if(isLoggedIn()) {
+    if(getCurrentUser() != null) {
         let orderNumberField = document.getElementById('order-number-field');
 
         orderNumberField.style.display = "block";
