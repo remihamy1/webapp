@@ -1,16 +1,17 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease;
 }
+
 footer {
     text-align: center;
-    padding: 20px;
+    padding-top: 10px; /*Erreur liée au padding. Remplacement de padding 20px par padding-top 10px et padding-bottom 10px*/
+    padding-bottom: 10px;
     background-color: #f2f2f2;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    position: relative;
 }
 
 footer p {
@@ -22,6 +23,10 @@ footer p {
     background-color: #333;
     color: white;
     padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
 }
 
 #navbar ul {
@@ -29,7 +34,6 @@ footer p {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
 }
 
 #navbar ul li {
@@ -50,17 +54,20 @@ footer p {
     flex: 1;
     background-color: #f4f4f4;
     padding: 20px;
+    transition: background-color 0.3s ease;
 }
 
 #main-content {
     flex: 3;
     padding: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .category, .product {
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ddd;
+    transition: transform 0.3s ease;
 }
 
 .category {
@@ -68,18 +75,30 @@ footer p {
     cursor: pointer;
 }
 
+.category:hover {
+    transform: scale(1.05);
+}
+
 #breadcrumb {
     margin-bottom: 20px;
+    transition: color 0.3s ease;
 }
 
 .breadcrumb-item {
     display: inline;
     margin-right: 5px;
+    color: #3498db;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
+
+.breadcrumb-item:hover {
+    color: #2980b9;
+}
+
 #produits {
     margin-top: 20px;
-    cursor: pointer; /* ou un autre type de curseur selon votre préférence */
-
+    cursor: pointer;
 }
 
 .product-item {
@@ -87,6 +106,11 @@ footer p {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
 }
 
 .product-name {
@@ -130,6 +154,7 @@ footer p {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .close-button:hover,
@@ -137,4 +162,21 @@ footer p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Médias queries pour rendre le site responsive */
+@media (max-width: 768px) {
+    #navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #cart-container, #login-container, #welcome-message {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #sidebar, #main-content {
+        width: 100%;
+    }
 }

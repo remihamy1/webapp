@@ -1,5 +1,8 @@
 const baseUrl = 'http://localhost:3000'; // URL de votre JSON Server
 
+//Load initial des produits sur la page principal
+loadProductsInitial();
+
 function loadCategories() {
     fetch(`${baseUrl}/categories`)
         .then(response => response.json())
@@ -16,7 +19,7 @@ function loadCategories() {
         });
 }
 
-function loadProducts(categoryId) {
+function loadProductsInitial() {
     fetch(`${baseUrl}/products`)
     .then(response => response.json())
     .then(products => {
@@ -37,6 +40,36 @@ function loadProducts(categoryId) {
                     productDiv.onclick = () => showProductDetail(product.id);
                     productsDiv.appendChild(productDiv);
                 });
+        });
+    });
+    fetch(`${baseUrl}/categories/1`)
+    .then(response => response.json())
+    .then(category => updateBreadcrumb(category.name));
+}
+
+function loadProducts(categoryId) {
+    fetch(`${baseUrl}/products`)
+    .then(response => response.json())
+    .then(products => {
+        const productsDiv = document.getElementById('liste-produits');
+        productsDiv.innerHTML = ''; // Nettoyer les anciens produits
+        products.forEach(product => {
+            if (product.categoryId === categoryId) {
+                fetch(`${baseUrl}/reviews?productId=${product.id}`)
+                    .then(response => response.json())
+                    .then(reviews => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product-item';
+                        productDiv.innerHTML = `
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <p class="product-price">${product.price} €</p>
+                            <div class="product-reviews">${generateReviewSummary(reviews)}</div>
+                        `;
+                        productDiv.onclick = () => showProductDetail(product.id);
+                        productsDiv.appendChild(productDiv);
+                    });
+            };
         });
     });
     fetch(`${baseUrl}/categories/1`)
@@ -105,6 +138,11 @@ function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    if (!validatePassword(password)) {
+        alert("Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.");
+        return;
+    }
+
     fetch(`${baseUrl}/users?username=${username}&password=${password}`)
         .then(response => response.json())
         .then(users => {
@@ -122,6 +160,12 @@ function login() {
 function getCurrentUser() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user; // Renvoie true si un utilisateur est connecté, sinon false
+}
+
+function validatePassword(password) {
+    // Au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial
+    var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
 }
 
 function updateLoginState() {
@@ -208,5 +252,5 @@ function showContactForm() {
 }
 
 function closeModal() {
-    document.getElementById('product-detail-modal').style.display = 'block';
+    document.getElementById('product-detail-modal').style.display = 'none';
 }
