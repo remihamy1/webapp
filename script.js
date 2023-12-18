@@ -149,8 +149,6 @@ function showProductDetail(productId) {
 }
 
 function submitContactForm(event) {
-    event.preventDefault();
-    
     const firstname = document.getElementById('firstname').value;
     const lastname = document.getElementById('lastname').value;
     const email = document.getElementById('email').value;
@@ -158,6 +156,9 @@ function submitContactForm(event) {
     // const orderNumber = document.getElementById('order-number') ? document.getElementById('order-number').value : null; // Récupération du numéro de commande si présent
     const message = document.getElementById('message').value;
 
+    if(!firstname || !lastname || !email || !subject || !message)
+        event.preventDefault();
+        
     alert('Votre demande a été soumise avec succès.');
 }
 
