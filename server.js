@@ -10,7 +10,6 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/')));
 
-
 const jsonServerInstance = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
