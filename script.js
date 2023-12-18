@@ -105,6 +105,11 @@ function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    if (!validatePassword(password)) {
+        alert("Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.");
+        return;
+    }
+
     fetch(`${baseUrl}/users?username=${username}&password=${password}`)
         .then(response => response.json())
         .then(users => {
@@ -115,6 +120,12 @@ function login() {
                 alert("Échec de la connexion.");
             }
         });
+}
+
+function validatePassword(password) {
+    // Au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial
+    var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
 }
 
 function updateLoginState() {
