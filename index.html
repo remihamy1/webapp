@@ -48,7 +48,7 @@
             </section>
             <section id="contact">
                 <h2>Contact</h2>
-                <form id="contact-form">
+                <form id="contact-form" onsubmit="submitContactForm(event)">
                     <div>
                         <label for="lastname">Nom :</label>
                         <input type="text" id="lastname" name="lastname" required>
@@ -69,7 +69,7 @@
                         <label for="message">Message :</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit" onclick="submitContactForm()">Envoyer</button>
+                    <button type="submit">Envoyer</button>
                 </form>
             </section>
             
