@@ -1,4 +1,4 @@
-const baseUrl = `${process.env.HOST}:4000` || 'http://locahost:4000'; // URL de votre JSON Server
+const baseUrl = `http://localhost:4000`;
 
 function loadCategories() {
     fetch(`${baseUrl}/categories`)
