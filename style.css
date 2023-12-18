@@ -160,3 +160,7 @@ footer p {
     background-color: #ddd;
     border-radius: 5px;
   }
+
+#sectionPaginate{
+    text-align: center;
+}
