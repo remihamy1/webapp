@@ -109,7 +109,9 @@ function login() {
         .then(response => response.json())
         .then(users => {
             if (users.length > 0) {
-                sessionStorage.setItem('user', JSON.stringify({ username: 'unknown' }));
+                let currentUser = users[0];
+
+                sessionStorage.setItem('user', JSON.stringify({ username: username, id: currentUser.id }));
                 updateLoginState();
             } else {
                 alert("Échec de la connexion.");
@@ -120,6 +122,11 @@ function login() {
 function isLoggedIn() {
     const user = JSON.parse(sessionStorage.getItem('user'));
     return user !== null; // Renvoie true si un utilisateur est connecté, sinon false
+}
+
+function getCurrentUser() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    return user; // Renvoie true si un utilisateur est connecté, sinon false
 }
 
 function updateLoginState() {
@@ -158,7 +165,7 @@ function submitContactForm(event) {
     const lastname = document.getElementById('lastname').value;
     const email = document.getElementById('email').value;
     const subject = document.getElementById('subject').value;
-    // const orderNumber = document.getElementById('order-number') ? document.getElementById('order-number').value : null; // Récupération du numéro de commande si présent
+    const orderNumber = document.getElementById('order-number') ? document.getElementById('order-number').value : null; // Récupération du numéro de commande si présent
     const message = document.getElementById('message').value;
 
     // Expression régulière pour valider l'email
@@ -168,6 +175,41 @@ function submitContactForm(event) {
         event.preventDefault(); // Empêche l'envoi du formulaire si les conditions ne sont pas remplies
     
     alert('Votre demande a été soumise avec succès.');
+}
+
+function showContactForm() {
+    const showContactFormButton = document.getElementById('show-contact-form-button');
+    const contactForm = document.getElementById('contact-form');
+
+    contactForm.style.display = "block";
+    showContactFormButton.style.display = "none";
+    if(isLoggedIn()) {
+        let orderNumberField = document.getElementById('order-number-field');
+
+        orderNumberField.style.display = "block";
+
+        let currentUser = getCurrentUser();
+
+        fetch(`${baseUrl}/users/${currentUser.id}/orders`)
+        .then(response => response.json())
+        .then(orders => {
+            let orderNumberSelect = document.getElementById('order-number');
+
+            // Efface toutes les options existantes
+            orderNumberSelect.innerHTML = '';
+
+            // Ajoute une option pour chaque commande
+            orders.forEach(order => {
+                let option = document.createElement('option');
+                option.value = order.id; // Assure-toi que "orderNumber" est le champ approprié dans tes données d'ordre
+                option.textContent = `Commande ${order.id}`;
+                orderNumberSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des commandes :', error);
+        });
+    }
 }
 
 function closeModal() {
