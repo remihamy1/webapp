@@ -167,12 +167,22 @@ function login() {
     .then((response) => response.json())
     .then((users) => {
       if (users.length > 0) {
-        sessionStorage.setItem("user", JSON.stringify({ username: "unknown" }));
+        let currentUser = users[0];
+
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({ username: username, id: currentUser.id })
+        );
         updateLoginState();
       } else {
         alert("Échec de la connexion.");
       }
     });
+}
+
+function getCurrentUser() {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  return user; // Renvoie true si un utilisateur est connecté, sinon false
 }
 
 function validatePassword(password) {
@@ -214,6 +224,82 @@ function showProductDetail(productId) {
       ).textContent = `${product.price} €`;
       document.getElementById("product-detail-modal").style.display = "block";
     });
+}
+
+function submitContactForm(event) {
+  const firstname = document.getElementById("firstname").value;
+  const lastname = document.getElementById("lastname").value;
+  const email = document.getElementById("email").value;
+  const subject = document.getElementById("subject").value;
+  const orderNumber = document.getElementById("order-number")
+    ? document.getElementById("order-number").value
+    : null; // Récupération du numéro de commande si présent
+  const message = document.getElementById("message").value;
+
+  // Expression régulière pour valider l'email
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (
+    !firstname ||
+    !lastname ||
+    !email ||
+    !subject ||
+    !message ||
+    !emailPattern.test(email)
+  )
+    event.preventDefault(); // Empêche l'envoi du formulaire si les conditions ne sont pas remplies
+
+  showAlert("Votre demande a été soumise avec succès.");
+}
+
+function showContactForm() {
+  const showContactFormButton = document.getElementById(
+    "show-contact-form-button"
+  );
+  const contactForm = document.getElementById("contact-form");
+
+  contactForm.style.display = "block";
+  showContactFormButton.style.display = "none";
+  if (getCurrentUser() != null) {
+    let orderNumberField = document.getElementById("order-number-field");
+
+    orderNumberField.style.display = "block";
+
+    let currentUser = getCurrentUser();
+
+    fetch(`${baseUrl}/users/${currentUser.id}/orders`)
+      .then((response) => response.json())
+      .then((orders) => {
+        let orderNumberSelect = document.getElementById("order-number");
+
+        // Efface toutes les options existantes
+        orderNumberSelect.innerHTML = "";
+
+        // Ajoute une option pour chaque commande
+        orders.forEach((order) => {
+          let option = document.createElement("option");
+          option.value = order.id; // Assure-toi que "orderNumber" est le champ approprié dans tes données d'ordre
+          option.textContent = `Commande ${order.id}`;
+          orderNumberSelect.appendChild(option);
+        });
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des commandes :", error);
+      });
+  }
+}
+
+function showAlert(message) {
+  const alert = document.getElementById("custom-alert");
+  const alertMessage = document.getElementById("alert-message");
+
+  alertMessage.textContent = message;
+  alert.style.display = "block";
+}
+
+function closeAlert() {
+  const alert = document.getElementById("custom-alert");
+  alert.style.display = "none";
 }
 
 function closeModal() {

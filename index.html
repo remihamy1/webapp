@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav id="navbar">
+    <nav id="navbar" style="width: 100%;"> <!-- correction de la largeur de la navbar. 110%=>100% -->
         <ul>
             <li><a href="#accueil">Accueil</a></li>
             <li><a href="#produits">Produits</a></li>
@@ -44,7 +44,48 @@
                 <h2>Produits</h2>
                 <div id="liste-produits"></div>
             </section>
-            <div id="product-detail-modal" class="modal" style="width: 100%;">
+            <section id="contact">
+                <h2>Contact</h2>
+                <button id="show-contact-form-button" onclick="showContactForm()">Faire une demande</button>
+                <form id="contact-form" style="display: none;" onsubmit="submitContactForm(event)">
+                    <div>
+                        <label for="lastname">Nom :</label>
+                        <input type="text" id="lastname" name="lastname" required>
+                    </div>
+                    <div>
+                        <label for="firstname">Prénom :</label>
+                        <input type="text" id="firstname" name="firstname" required>
+                    </div>
+                    <div>
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div id="order-number-field" style="display: none;">
+                        <label for="order-number">Numéro de commande :</label>
+                        <select id="order-number" name="order-number">
+                        </select>
+                    </div>
+                    <div>
+                        <label for="subject">Sujet de la demande :</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    <div>
+                        <label for="message">Message :</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </section>
+            
+            <!-- Composant Alert -->
+            <div id="custom-alert" class="alert">
+                <div class="alert-content">
+                    <span class="close-button" onclick="closeAlert()">&times;</span>
+                    <p id="alert-message"></p>
+                </div>
+            </div>
+
+            <div id="product-detail-modal" class="modal" style="width: 200%;">
                 <div class="modal-content">
                     <span class="close-button" onClick="closeModal()">&times;</span>
                     <h2 id="product-detail-name"></h2>
