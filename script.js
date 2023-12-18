@@ -17,7 +17,7 @@ function loadCategories() {
 }
 
 const itemsPerPage = 5; // Set the number of products to display per page
-let currentPage = 1; // Initialize the current page
+let currentPage = 1; // Current page
 
 function loadProducts(categoryId) {
   const productsDiv = document.getElementById("liste-produits");
@@ -25,11 +25,9 @@ function loadProducts(categoryId) {
 
   fetch(`${baseUrl}/products?_page=${currentPage}&_limit=${itemsPerPage}`)
     .then((response) => {
-      // Check the 'Link' header for pagination information
       const linkHeader = response.headers.get("Link");
       const totalItems = parseInt(response.headers.get("X-Total-Count"));
 
-      // Update pagination controls
       updatePaginationControls(totalItems);
 
       return response.json();
@@ -70,7 +68,7 @@ function updatePaginationControls(totalItems) {
     pageLink.textContent = i;
     pageLink.onclick = () => {
       currentPage = i;
-      loadProducts(); // Reload products for the selected page
+      loadProducts();
     };
 
     if (i === currentPage) {
