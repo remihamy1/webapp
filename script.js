@@ -156,9 +156,12 @@ function submitContactForm(event) {
     // const orderNumber = document.getElementById('order-number') ? document.getElementById('order-number').value : null; // Récupération du numéro de commande si présent
     const message = document.getElementById('message').value;
 
-    if(!firstname || !lastname || !email || !subject || !message)
-        event.preventDefault();
-        
+    // Expression régulière pour valider l'email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!firstname || !lastname || !email || !subject || !message || !emailPattern.test(email))
+        event.preventDefault(); // Empêche l'envoi du formulaire si les conditions ne sont pas remplies
+    
     alert('Votre demande a été soumise avec succès.');
 }
 
