@@ -148,6 +148,19 @@ function showProductDetail(productId) {
         });
 }
 
+function submitContactForm(event) {
+    event.preventDefault();
+    
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    // const orderNumber = document.getElementById('order-number') ? document.getElementById('order-number').value : null; // Récupération du numéro de commande si présent
+    const message = document.getElementById('message').value;
+
+    alert('Votre demande a été soumise avec succès.');
+}
+
 function closeModal() {
     document.getElementById('product-detail-modal').style.display = 'block';
 }
