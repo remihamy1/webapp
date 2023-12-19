@@ -20,7 +20,7 @@ class Utilisateur {
                 throw new Error("Unable to fetch users");
             }
             const users = await response.json();
-            const lastUsers = orders[orders.length - 1];
+            const lastUsers = users[users.length - 1];
             return lastUsers ? lastUsers.id : 0;
         } catch (error) {
             console.error("Error fetching users:", error.message);
@@ -37,10 +37,10 @@ class Utilisateur {
     
             const usersData = await response.json();
             if (Array.isArray(usersData)) {
-                const users = usersData.map((orderData) => {
+                const users = usersData.map((userData) => {
                     const user = new User();
     
-                    Object.assign(user, orderData)
+                    Object.assign(user, userData)
     
                     return user;
                 });
@@ -83,7 +83,7 @@ class Utilisateur {
     
     async save() {
         try {
-            const lastUserId = await Order.#getLastUserId();
+            const lastUserId = await User.#getLastUserId();
             this.id = lastUserId + 1;
     
             const body = {};
@@ -165,7 +165,7 @@ class Utilisateur {
         }
     }
 }
-    async function createOrder() {
+    async function createU() {
         
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
