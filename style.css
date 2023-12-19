@@ -1,223 +1,312 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s ease;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
 }
 
 footer {
-    text-align: center;
-    padding-top: 10px; /*Erreur liée au padding. Remplacement de padding 20px par padding-top 10px et padding-bottom 10px*/
-    padding-bottom: 10px;
-    background-color: #f2f2f2;
-    position: relative;
+  text-align: center;
+  padding-top: 10px; /*Erreur liée au padding. Remplacement de padding 20px par padding-top 10px et padding-bottom 10px*/
+  padding-bottom: 10px;
+  background-color: #f2f2f2;
+  position: relative;
 }
 
 footer p {
-    margin: 0;
-    color: #333;
+  margin: 0;
+  color: #333;
 }
-
 #navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s ease;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 #navbar ul li {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 
 #navbar ul li a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #777;
 }
 
 #container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #sidebar {
-    flex: 1;
-    background-color: #f4f4f4;
-    padding: 20px;
-    transition: background-color 0.3s ease;
+  flex: 1;
+  background-color: #f4f4f4;
+  padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
 #main-content {
-    flex: 3;
-    padding: 20px;
-    transition: background-color 0.3s ease;
+  flex: 3;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+  padding-bottom: calc(100px);
 }
 
-.category, .product {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    transition: transform 0.3s ease;
+.category,
+.product {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease;
 }
 
 .category {
-    background-color: #e7e7e7;
-    cursor: pointer;
+  background-color: #e7e7e7;
+  cursor: pointer;
 }
 
 .category:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.category:hover {
+  transform: scale(1.05);
 }
 
 #breadcrumb {
-    margin-bottom: 20px;
-    transition: color 0.3s ease;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
 }
 
 .breadcrumb-item {
-    display: inline;
-    margin-right: 5px;
-    color: #3498db;
-    cursor: pointer;
-    transition: color 0.3s ease;
+  display: inline;
+  margin-right: 5px;
+  color: #3498db;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .breadcrumb-item:hover {
-    color: #2980b9;
+  color: #2980b9;
 }
 
 #produits {
-    margin-top: 20px;
-    cursor: pointer;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
 .product-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
 }
 
 .product-item:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .product-name {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .product-description {
-    font-size: 14px;
-    color: #555;
+  font-size: 14px;
+  color: #555;
 }
 
 .product-price {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
 }
 
 /* Style de l'alert */
 .alert {
-    display: none; /* Initialement cachée */
-    position: fixed; /* Position fixée pour l'alert */
-    top: 50%; /* Centrage vertical */
-    left: 50%; /* Centrage horizontal */
-    transform: translate(-50%, -50%); /* Centrage absolu */
-    background-color: #fff; /* Couleur de fond */
-    border: 1px solid #ccc; /* Bordure */
-    border-radius: 5px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
-    padding: 20px; /* Espacement intérieur */
-    max-width: 400px; /* Largeur maximale */
+  display: none; /* Initialement cachée */
+  position: fixed; /* Position fixée pour l'alert */
+  top: 50%; /* Centrage vertical */
+  left: 50%; /* Centrage horizontal */
+  transform: translate(-50%, -50%); /* Centrage absolu */
+  background-color: #fff; /* Couleur de fond */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 5px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  padding: 20px; /* Espacement intérieur */
+  max-width: 400px; /* Largeur maximale */
 }
 
 /* Style pour le bouton de fermeture */
 .alert-close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #888;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
 }
 
 /* Style pour le contenu de la alert */
 .alert-content {
-    margin-top: 20px; /* Espacement du haut */
+  margin-top: 20px; /* Espacement du haut */
 }
 
 /* Style pour le message */
 .alert-message {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Style de l'alert */
+.alert {
+  display: none; /* Initialement cachée */
+  position: fixed; /* Position fixée pour l'alert */
+  top: 50%; /* Centrage vertical */
+  left: 50%; /* Centrage horizontal */
+  transform: translate(-50%, -50%); /* Centrage absolu */
+  background-color: #fff; /* Couleur de fond */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 5px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  padding: 20px; /* Espacement intérieur */
+  max-width: 400px; /* Largeur maximale */
+}
+
+/* Style pour le bouton de fermeture */
+.alert-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+}
+
+/* Style pour le contenu de la alert */
+.alert-content {
+  margin-top: 20px; /* Espacement du haut */
+}
+
+/* Style pour le message */
+.alert-message {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
 }
 
 .close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    transition: color 0.3s ease;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Médias queries pour rendre le site responsive */
 @media (max-width: 768px) {
-    #navbar ul {
-        flex-direction: column;
-        align-items: center;
-    }
+  #navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    #cart-container, #login-container, #welcome-message {
-        flex-direction: column;
-        align-items: center;
-    }
+  #cart-container,
+  #login-container,
+  #login-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    #sidebar, #main-content {
-        width: 100%;
-    }
+  #sidebar,
+  #main-content {
+    width: 100%;
+  }
+}
+/* Pagination */
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #a3a3a3;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+#sectionPaginate {
+  text-align: center;
 }
 
 /* ---------------Animation---------------- */
