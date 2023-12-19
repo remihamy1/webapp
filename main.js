@@ -1,7 +1,7 @@
 const baseUrl = "http://localhost:3000"; // URL de votre JSON Server
 
 //Load initial des produits sur la page principal
-loadProductsInitial();
+loadProducts();
 
 function generateReviewSummary(reviews) {
   if (reviews.length === 0) return "Pas d'avis pour ce produit.";

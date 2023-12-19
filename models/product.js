@@ -11,10 +11,10 @@ function generateProductDiv(product, reviews) {
     return productDiv;
   }
 
-  const itemsPerPage = 2; // Set the number of products to display per page
+  const itemsPerPage = 9; // Set the number of products to display per page
   let currentPage = 1; // Current page
   
-  function loadProducts(categoryId) {
+  function loadProducts() {
     const productsDiv = document.getElementById("liste-produits");
     productsDiv.innerHTML = ""; // Clear the existing products
   
@@ -74,35 +74,6 @@ function generateProductDiv(product, reviews) {
     }
   }
   
-  function loadProductsInitial() {
-    fetch(`${baseUrl}/products`)
-      .then((response) => response.json())
-      .then((products) => {
-        const productsDiv = document.getElementById("liste-produits");
-        productsDiv.innerHTML = ""; // Nettoyer les anciens produits
-        products.forEach((product) => {
-          fetch(`${baseUrl}/reviews?productId=${product.id}`)
-            .then((response) => response.json())
-            .then((reviews) => {
-              const productDiv = document.createElement("div");
-              productDiv.className = "product-item";
-              productDiv.innerHTML = `
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <p class="product-price">${product.price} €</p>
-                        <div class="product-reviews">${generateReviewSummary(
-                          reviews
-                        )}</div>
-                    `;
-              productDiv.onclick = () => showProductDetail(product.id);
-              productsDiv.appendChild(productDiv);
-            });
-        });
-      });
-    fetch(`${baseUrl}/categories/1`)
-      .then((response) => response.json())
-      .then((category) => updateBreadcrumb(category.name));
-  }
   
   function searchProducts() {
     const searchText = document.getElementById("search-box").value.toLowerCase();
