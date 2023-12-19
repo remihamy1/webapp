@@ -9,33 +9,32 @@
     <body>
         <nav id="navbar">
             <ul>
-              <li><a href="#accueil">Pop-Shop</a></li>
-              <li><a href="#produits">Produits</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
-              <li>
-                <input
-                type="text"
-                id="search-box"
-                placeholder="Rechercher un produit..."
-                />
-                <button onclick="searchProducts()">Recherche</button>
-              </li>
+                <li><a href="#accueil">Pop-Shop</a></li>
+                <li><a href="#produits">Produits</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
+                <li>
+                    <input
+                        type="text"
+                        id="search-box"
+                        placeholder="Rechercher un produit..." />
+                    <button onclick="searchProducts()">Recherche</button>
+                </li>
             </ul>
-      
+
             <div id="login-container">
-              <input type="text" id="username" placeholder="Nom d'utilisateur" />
-              <input type="password" id="password" placeholder="Mot de passe" />
-              <button onclick="login()">Connexion</button>
+                <input type="text" id="username" placeholder="Nom d'utilisateur" />
+                <input type="password" id="password" placeholder="Mot de passe" />
+                <button onclick="login()">Connexion</button>
             </div>
-      
+
             <div id="logout-container" style="display: none">
-              <button onclick="logout()">Déconnexion</button>
+                <button onclick="logout()">Déconnexion</button>
             </div>
-          </nav>
+        </nav>
 
         <div id="welcome-message" style="display: none">
-          <h2>Bienvenue, <span id="user-name"></span>!</h2>
+            <h2>Bienvenue, <span id="user-name"></span>!</h2>
         </div>
 
         <div id="container">
