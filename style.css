@@ -15,39 +15,56 @@ footer {
 }
 
 footer p {
-    margin: 0;
-    color: #333;
+  margin: 0;
+  color: #333;
 }
-
 #navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s ease;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 #navbar ul li {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 
 #navbar ul li a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #777;
 }
 
 #container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #sidebar {
@@ -72,8 +89,8 @@ footer p {
 }
 
 .category {
-    background-color: #e7e7e7;
-    cursor: pointer;
+  background-color: #e7e7e7;
+  cursor: pointer;
 }
 
 .category:hover {
@@ -115,39 +132,39 @@ footer p {
 }
 
 .product-name {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .product-description {
-    font-size: 14px;
-    color: #555;
+  font-size: 14px;
+  color: #555;
 }
 
 .product-price {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
 }
 
 /* Style de l'alert */
@@ -209,7 +226,7 @@ footer p {
         align-items: center;
     }
 
-    #cart-container, #login-container, #welcome-message {
+    #cart-container, #login-container, #login-container {
         flex-direction: column;
         align-items: center;
     }
