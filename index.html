@@ -103,17 +103,18 @@
                         <span class="close-button" onclick="closeAlert()">&times;</span>
                         <p id="alert-message"></p>
                     </div>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </section>
+            
+            <div id="product-detail-modal" class="modal" style="width: 200%;">
+                <div class="modal-content">
+                    <span class="close-button" onClick="closeModal()">&times;</span>
+                    <h2 id="product-detail-name"></h2>
+                    <p id="product-detail-description"></p>
+                    <p id="product-detail-price"></p>
                 </div>
-
-                <div id="product-detail-modal" class="modal"
-                    style="width: 100%;">
-                    <div class="modal-content">
-                        <span class="close-button" onClick="closeModal()">&times;</span>
-                        <h2 id="product-detail-name"></h2>
-                        <p id="product-detail-description"></p>
-                        <p id="product-detail-price"></p>
-                    </div>
-                </div>
+             </div>
             </main>
         </div>
 
