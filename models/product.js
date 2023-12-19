@@ -145,6 +145,9 @@ function loadProducts(categoryId) {
 function searchProducts() {
   currentPage = 1;
   const searchText = document.getElementById("search-box").value.toLowerCase();
+ if (searchText === "") {
+    return; 
+  }
   fetch(`${baseUrl}/products`)
     .then((response) => response.json())
     .then((products) => {
