@@ -69,4 +69,5 @@ function login() {
   function logout() {
     sessionStorage.removeItem("user");
     updateLoginState();
+    updatePageForRole();
   }
