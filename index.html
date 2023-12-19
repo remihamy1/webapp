@@ -9,7 +9,7 @@
     <body>
         <nav id="navbar">
             <ul>
-                <li><a href="#accueil">Pop-Shop</a></li>
+                <li><a href="/">Pop-Shop</a></li>
                 <li><a href="#produits">Produits</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
@@ -41,6 +41,13 @@
 
         <div id="container">
             <aside id="sidebar">
+                <div id= "add-categorie" style="display: none;">
+                    <h2>Ajouter une catégorie</h2>
+                    <form id="category-form">
+                        <input type="text" id="category-name" name="categoryName" required>
+                        <button type="button" onclick="addCategory()">Ajouter</button>
+                    </form>
+                </div>
                 <h2>Categories</h2>
                 <div id="categories"></div>
             </aside>
