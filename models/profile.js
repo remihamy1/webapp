@@ -17,7 +17,7 @@ function login() {
   
           sessionStorage.setItem(
             "user",
-            JSON.stringify({ username: username, id: currentUser.id })
+            JSON.stringify({ username: username, id: currentUser.id, email: currentUser.email, role: currentUser.role})
           );
           updateLoginState();
         } else {
@@ -30,7 +30,20 @@ function login() {
     const user = JSON.parse(sessionStorage.getItem("user"));
     return user; // Renvoie true si un utilisateur est connecté, sinon false
   }
-  
+
+  // Fonction pour mettre à jour l'affichage en fonction du rôle de l'utilisateur
+  function updatePageForRole() {
+    const currentUser = getCurrentUser();
+
+    const adminNavSections = document.getElementById('admin-section');
+
+    if (currentUser && currentUser.role === 'admin') {
+        adminNavSections.style.display = 'block';
+    } else {
+        adminNavSections.style.display = 'none';
+    }
+  }
+
   function validatePassword(password) {
     // Au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial
     var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
