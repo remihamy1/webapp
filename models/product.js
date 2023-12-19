@@ -25,9 +25,7 @@ function loadProductsInitial() {
             productDiv.className = "product-item";
             productDiv.innerHTML = `
                         <h3 class="product-name">${product.name}</h3>
-                        <p class="product-description">${
-                          product.description
-                        }</p>
+                        <p class="product-description">${product.description}</p>
                         <p class="product-price">${product.price} €</p>
                         <div class="product-reviews">${generateReviewSummary(
                           reviews
@@ -43,14 +41,13 @@ function loadProductsInitial() {
     .then((category) => updateBreadcrumb(category.name));
 }
 
+
 function loadProducts(categoryId) {
   fetch(`${baseUrl}/products`)
     .then((response) => response.json())
     .then((products) => {
       if (categoryId != null) {
-        products = products.filter(
-          (product) => product.categoryId == categoryId
-        );
+        products = products.filter((product) => product.categoryId == categoryId);
       }
       const productsDiv = document.getElementById("liste-produits");
       productsDiv.innerHTML = ""; // Clear old products
