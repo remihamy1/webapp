@@ -111,3 +111,15 @@ function loadProducts(categoryId) {
         document.getElementById("product-detail-modal").style.display = "block";
       });
   }
+
+  function filteredProducts(){
+    const searchPrix = document.getElementById('maxPrice').value.toLowerCase();
+
+    fetch(`${baseUrl}/products`)
+        .then(response => response.json())
+        .then(products => {
+            const filteredProducts = products.filter(product => product.price < searchPrix);
+            displayProducts(filteredProducts);
+        });
+    
+}
