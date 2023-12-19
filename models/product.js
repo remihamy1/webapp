@@ -1,7 +1,8 @@
 function generateProductDiv(product, reviews) {
-  const productDiv = document.createElement("div");
-  productDiv.className = "product-item";
-  productDiv.innerHTML = `
+    const productDiv = document.createElement("div");
+    productDiv.className = "product-item";
+    productDiv.innerHTML = `
+        <img src="https://placehold.co/400x400"/>
         <h3 class="product-name">${product.name}</h3>
         <p class="product-description">${product.description}</p>
         <p class="product-price">${product.price} €</p>
@@ -98,6 +99,7 @@ function loadProductsInitial() {
             const productDiv = document.createElement("div");
             productDiv.className = "product-item";
             productDiv.innerHTML = `
+                        <img src="https://placehold.co/400x400"/>
                         <h3 class="product-name">${product.name}</h3>
                         <p class="product-description">${
                           product.description
