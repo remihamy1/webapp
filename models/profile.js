@@ -1,6 +1,7 @@
-function login() {
+async function login() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
+
 
   if (!validatePassword(password)) {
     alert(
@@ -9,21 +10,23 @@ function login() {
     return;
   }
 
-  fetch(`${baseUrl}/users?username=${username}&password=${password}`)
-    .then((response) => response.json())
-    .then((users) => {
-      if (users.length > 0) {
-        let currentUser = users[0];
+  const hashPasswordLocal = await hashPassword(password)
 
-        sessionStorage.setItem(
-          "user",
-          JSON.stringify({ username: username, id: currentUser.id })
-        );
-        updateLoginState();
-      } else {
-        alert("Échec de la connexion.");
-      }
-    });
+  fetch(`${baseUrl}/users?username=${username}&password=${hashPasswordLocal}`)
+      .then((response) => response.json())
+      .then((users) => {
+        if (users.length > 0) {
+          let currentUser = users[0];
+
+          sessionStorage.setItem(
+              "user",
+              JSON.stringify({username: username, id: currentUser.id})
+          );
+          updateLoginState();
+        } else {
+          alert("Échec de la connexion.");
+        }
+      });
 }
 
 function getCurrentUser() {
