@@ -69,6 +69,12 @@ function validatePassword(password) {
   return regex.test(password);
 }
 
+async function isEmailRegistered(email) {
+  const response = await fetch(`${baseUrl}/users?email=${email}`);
+  const users = await response.json();
+  return users.length > 0;
+}
+
 async function register() {
   const username = document.getElementById('register-username').value;
   const email = document.getElementById('register-email').value;
@@ -82,6 +88,13 @@ async function register() {
 
   if (!validatePassword(password)) {
     alert("Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.");
+    return;
+  }
+
+  // Vérifier si l'email est déjà enregistré
+  const emailExists = await isEmailRegistered(email);
+  if (emailExists) {
+    alert("Un compte avec cet email existe déjà.");
     return;
   }
 
@@ -111,6 +124,10 @@ async function register() {
 
     const user = await response.json();
     alert('Inscription réussie');
+
+    // Fermer la popup d'inscription ici
+    document.getElementById('register-popup').style.display = 'none';
+
     // Autres actions après une inscription réussie...
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error);
