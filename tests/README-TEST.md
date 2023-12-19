@@ -10,5 +10,5 @@
 
 ### Tests disponibles : 2
 
--> validatePassword : OK
--> validatePassword : KO
+- validatePassword : OK
+- validatePassword : KO
