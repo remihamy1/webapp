@@ -31,56 +31,64 @@
           "name": "Laptop Haute Performance",
           "description": "Un laptop puissant pour tous vos besoins informatiques",
           "price": 1200.99,
-          "categoryId": 1
+          "categoryId": 1,
+          "image": "https://virtuavisit.fr/wp-content/uploads/2019/09/LD0004965359_2_0005141339.jpg"
         },
         {
           "id": 2,
           "name": "Roman d'Aventure",
           "description": "Un livre captivant qui vous tiendra en haleine",
           "price": 15.99,
-          "categoryId": 2
+          "categoryId": 2,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/8/86/Verne_Tour_du_Monde.jpg"
         },
         {
           "id": 3,
           "name": "Smartphone dernière génération",
           "description": "Un smartphone rapide et élégant avec la dernière technologie",
           "price": 800.50,
-          "categoryId": 1
+          "categoryId": 1,
+          "image": "https://cdn.futura-sciences.com/cdn-cgi/image/width=1024,quality=60,format=auto/sources/iphone-14-pro.jpg"
         },
         {
           "id": 4,
           "name": "Casque Audio Bluetooth",
           "description": "Casque audio sans fil avec qualité sonore exceptionnelle",
           "price": 250.00,
-          "categoryId": 1
+          "categoryId": 1,
+          "image": "https://m.media-amazon.com/images/I/61-ZTbzw6oL.jpg"
         },
         {
           "id": 5,
           "name": "Livre de Cuisine",
           "description": "Découvrez de nouvelles recettes avec ce livre de cuisine",
           "price": 20.00,
-          "categoryId": 2
+          "categoryId": 2,
+          "image": "https://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Visual_Principal_340/3/8/9/9782012357983/tsp20121001131730/Cuisine-attitude.jpg"
         },
         {
           "id": 6,
           "name": "Caméra de Surveillance",
           "description": "Caméra de haute qualité pour une sécurité accrue",
           "price": 180.75,
-          "categoryId": 1
+          "categoryId": 1,
+          "image": "https://media.sketchfab.com/models/55455921d6224c2b8ff0a0334a327b1e/thumbnails/4cda3b3ebd094913bdb76a55087cdeee/cca01294190d464483adccfe89f181c1.jpeg"
         },
         {
           "id": 7,
           "name": "Enceinte Portable",
           "description": "Enceinte portable pour écouter votre musique partout",
           "price": 99.99,
-          "categoryId": 1
+          "categoryId": 1,
+          "image": null
         },
         {
           "id": 8,
           "name": "Roman Policier",
           "description": "Plongez dans une enquête palpitante avec ce thriller",
           "price": 12.99,
-          "categoryId": 2
+          "categoryId": 2,
+          "image": null
         }
       ],
     "orders": [
