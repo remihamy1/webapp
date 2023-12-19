@@ -3,46 +3,49 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pop-Shop</title>
+        <title>Webapp</title>
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-        <nav id="navbar">
+        <nav id="navbar" style="width: 100%;">
+            <!-- correction de la largeur de la navbar. 110%=>100% -->
             <ul>
-                <li><a href="#accueil">Pop-Shop</a></li>
+                <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#produits">Produits</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
-                <li>
-                    <input
-                        type="text"
-                        id="search-box"
-                        placeholder="Rechercher un produit..." />
-                    <button onclick="searchProducts()">Recherche</button>
-                </li>
             </ul>
-
+            <div id="cart-container">
+                <h2>Panier</h2>
+                <div id="cart-items"></div>
+            </div>
             <div id="login-container">
-                <input type="text" id="username" placeholder="Nom d'utilisateur" />
-                <input type="password" id="password" placeholder="Mot de passe" />
+                <input type="text" id="username" placeholder="Nom d'utilisateur">
+                <input type="password" id="password" placeholder="Mot de passe">
                 <button onclick="login()">Connexion</button>
             </div>
 
-            <div id="logout-container" style="display: none">
+            <div id="welcome-message" style="display: none;">
+                <h2>Bienvenue, <span id="user-name"></span>!</h2>
                 <button onclick="logout()">Déconnexion</button>
             </div>
         </nav>
-
-        <div id="welcome-message" style="display: none">
-            <h2>Bienvenue, <span id="user-name"></span>!</h2>
-        </div>
 
         <div id="container">
             <aside id="sidebar">
                 <h2>Categories</h2>
                 <div id="categories"></div>
+                <div>
+                    <input type="number" id="maxPrice"
+                        placeholder="Prix Maximun">
+                </div>
+                <button onclick="filteredProducts()">Recherche</button>
             </aside>
             <main id="main-content">
+                <div id="search-container">
+                    <input type="text" id="search-box"
+                        placeholder="Rechercher un produit...">
+                    <button onclick="searchProducts()">Recherche</button>
+                </div>
                 <div id="breadcrumb"></div>
                 <section id="produits">
                     <h2>Produits</h2>
@@ -114,8 +117,7 @@
         <script src="/models/profile.js"></script>
         <script src="../main.js"></script>
 
-        <footer
-            style="position: fixed; bottom: 0; width: 100%; text-align: center;">
+        <footer>
             <p>Version du site : 1.0.0</p>
         </footer>
     </body>
