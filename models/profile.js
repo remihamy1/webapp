@@ -3,7 +3,7 @@ function login() {
     const password = document.getElementById("password").value;
   
     if (!validatePassword(password)) {
-      alert(
+      showAlert(
         "Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial."
       );
       return;
@@ -21,7 +21,7 @@ function login() {
           );
           updateLoginState();
         } else {
-          alert("Échec de la connexion.");
+          showAlert("Échec de la connexion.");
         }
       });
   }
