@@ -77,10 +77,10 @@ button:hover {
 }
 
 #main-content {
-  flex: 3;
-  padding: 20px;
-  transition: background-color 0.3s ease;
-  padding-bottom: calc(100px);
+    flex: 3;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    padding-bottom: calc(100px);
 }
 
 .category,
@@ -102,6 +102,19 @@ button:hover {
 
 .category:hover {
   transform: scale(1.05);
+}
+
+.category-container {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.category-container button {
+  margin-left: 10px;
 }
 
 #breadcrumb {
@@ -270,12 +283,10 @@ button:hover {
     align-items: center;
   }
 
-  #cart-container,
-  #login-container,
-  #login-container {
-    flex-direction: column;
-    align-items: center;
-  }
+    #cart-container, #login-container, #logout-container {
+        flex-direction: column;
+        align-items: center;
+    }
 
   #sidebar,
   #main-content {
