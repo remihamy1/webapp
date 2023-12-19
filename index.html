@@ -9,7 +9,7 @@
     <body>
         <nav id="navbar">
             <ul>
-                <li><a href="#accueil">Pop-Shop</a></li>
+                <li><a href="/">Pop-Shop</a></li>
                 <li><a href="#produits">Produits</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
@@ -29,6 +29,8 @@
             </div>
 
             <div id="logout-container" style="display: none">
+                <span id="user-email"></span>
+                <span id="user-role"></span>
                 <button onclick="logout()">Déconnexion</button>
             </div>
         </nav>
@@ -39,6 +41,13 @@
 
         <div id="container">
             <aside id="sidebar">
+                <div id= "add-categorie" style="display: none;">
+                    <h2>Ajouter une catégorie</h2>
+                    <form id="category-form">
+                        <input type="text" id="category-name" name="categoryName" required>
+                        <button type="button" onclick="addCategory()">Ajouter</button>
+                    </form>
+                </div>
                 <h2>Categories</h2>
                 <div id="categories"></div>
             </aside>
@@ -129,17 +138,18 @@
                         <span class="close-button" onclick="closeAlert()">&times;</span>
                         <p id="alert-message"></p>
                     </div>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </section>
+            
+            <div id="product-detail-modal" class="modal" style="width: 200%;">
+                <div class="modal-content">
+                    <span class="close-button" onClick="closeModal()">&times;</span>
+                    <h2 id="product-detail-name"></h2>
+                    <p id="product-detail-description"></p>
+                    <p id="product-detail-price"></p>
                 </div>
-
-                <div id="product-detail-modal" class="modal"
-                    style="width: 100%;">
-                    <div class="modal-content">
-                        <span class="close-button" onClick="closeModal()">&times;</span>
-                        <h2 id="product-detail-name"></h2>
-                        <p id="product-detail-description"></p>
-                        <p id="product-detail-price"></p>
-                    </div>
-                </div>
+             </div>
             </main>
         </div>
 

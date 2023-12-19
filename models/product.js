@@ -83,6 +83,7 @@ function loadProductsInitial() {
     .then((products) => {
       const productsDiv = document.getElementById("liste-produits");
       productsDiv.innerHTML = ""; // Nettoyer les anciens produits
+      products.forEach((product) => {
 
       updatePaginationControls(products.length, undefined);
 
@@ -91,7 +92,6 @@ function loadProductsInitial() {
         (currentPage - 1) * itemsPerPage + itemsPerPage
       );
 
-      newsProducts.forEach((product) => {
         fetch(`${baseUrl}/reviews?productId=${product.id}`)
           .then((response) => response.json())
           .then((reviews) => {
@@ -117,9 +117,37 @@ function loadProductsInitial() {
     .then((category) => updateBreadcrumb(category.name));
 }
 
+
+function loadProducts(categoryId) {
+  fetch(`${baseUrl}/products`)
+    .then((response) => response.json())
+    .then((products) => {
+      if (categoryId != null) {
+        products = products.filter((product) => product.categoryId == categoryId);
+      }
+      const productsDiv = document.getElementById("liste-produits");
+      productsDiv.innerHTML = ""; // Clear old products
+      products.forEach((product) => {
+        fetch(`${baseUrl}/reviews?productId=${product.id}`)
+          .then((response) => response.json())
+          .then((reviews) => {
+            const productDiv = generateProductDiv(product, reviews);
+            productsDiv.appendChild(productDiv);
+          });
+      });
+    });
+  fetch(`${baseUrl}/categories/1`)
+    .then((response) => response.json())
+    .then((category) => updateBreadcrumb(category.name));
+}
+
+
 function searchProducts() {
   currentPage = 1;
   const searchText = document.getElementById("search-box").value.toLowerCase();
+ if (searchText === "") {
+    return; 
+  }
   fetch(`${baseUrl}/products`)
     .then((response) => response.json())
     .then((products) => {
@@ -154,6 +182,33 @@ function showProductDetail(productId) {
   fetch(`${baseUrl}/products/${productId}`)
     .then((response) => response.json())
     .then((product) => {
+      if (product.name === null || product.name === undefined) {
+        document.getElementById("product-detail-name").textContent =
+          "Nom du produit incorrect";
+      } else {
+        document.getElementById(
+          "product-detail-name"
+        ).textContent = `${product.name}`;
+      }
+
+      if (product.description === null || product.description === undefined) {
+        document.getElementById("product-detail-name").textContent =
+          "Nom du produit incorrect";
+      } else {
+        document.getElementById(
+          "product-detail-description"
+        ).textContent = `${product.description}`;
+      }
+
+      if (product.price === null || product.price === undefined) {
+        document.getElementById("product-detail-name").textContent =
+          "Nom du produit incorrect";
+      } else {
+        document.getElementById(
+          "product-detail-price"
+        ).textContent = `${product.price} €`;
+      }
+
       document.getElementById("product-detail-name").textContent =
         "Nom du produit incorrect";
       document.getElementById("product-detail-description").textContent =
