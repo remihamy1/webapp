@@ -63,8 +63,7 @@ footer p {
   transition: background-color 0.3s ease;
 }
 
-.category,
-.product {
+.category, .product {
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #ddd;
@@ -209,15 +208,12 @@ footer p {
     align-items: center;
   }
 
-  #cart-container,
-  #login-container,
-  #welcome-message {
+  #cart-container, #login-container, #welcome-message {
     flex-direction: column;
     align-items: center;
   }
 
-  #sidebar,
-  #main-content {
+  #sidebar, #main-content {
     width: 100%;
   }
 }
