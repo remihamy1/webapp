@@ -3,14 +3,14 @@
       {
         "id": 1,
         "username": "user1",
-        "password": "pass1",
+        "password": "epsiDEV$9516",
         "email": "user1@example.com",
         "role": "customer"
       },
       {
         "id": 2,
         "username": "admin",
-        "password": "adminpass",
+        "password": "Adminpass185*",
         "email": "admin@example.com",
         "role": "admin"
       }
