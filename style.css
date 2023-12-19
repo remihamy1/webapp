@@ -101,6 +101,19 @@ button:hover {
     transform: scale(1.05);
 }
 
+.category-container {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.category-container button {
+  margin-left: 10px;
+}
+
 #breadcrumb {
     margin-bottom: 20px;
     transition: color 0.3s ease;
@@ -267,7 +280,7 @@ button:hover {
         align-items: center;
     }
 
-    #cart-container, #login-container, #login-container {
+    #cart-container, #login-container, #logout-container {
         flex-direction: column;
         align-items: center;
     }

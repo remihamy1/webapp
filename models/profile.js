@@ -17,8 +17,8 @@ function login() {
   
           sessionStorage.setItem(
             "user",
-            JSON.stringify({ username: username, id: currentUser.id })
-          );
+            JSON.stringify({ username: username, id: currentUser.id, email: currentUser.email, role: currentUser.role})
+            );
           updateLoginState();
         } else {
           alert("Échec de la connexion.");
@@ -39,6 +39,24 @@ function login() {
   
   function updateLoginState() {
     const user = JSON.parse(sessionStorage.getItem("user"));
+
+    if (user && user.role === "admin") {
+      document.getElementById("add-categorie").style.display = "block";
+
+      var elements = document.getElementsByClassName("delete-button-category");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = "block";
+      }    
+
+    } else {
+      document.getElementById("add-categorie").style.display = "none";
+
+      var elements = document.getElementsByClassName("delete-button-category");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = "none";
+      }    
+    }
+
     if (user) {
       document.getElementById("login-container").style.display = "none";
       document.getElementById("logout-container").style.display = "block";
