@@ -31,7 +31,7 @@ function getCurrentUser() {
   return user; // Renvoie true si un utilisateur est connecté, sinon false
 }
 
-function validatePassword(password) {
+export function validatePassword(password) {
   // Au moins 8 caractères, une lettre majuscule, un chiffre et un caractère spécial
   var regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   return regex.test(password);
