@@ -3,97 +3,52 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pop-Shop</title>
+        <title>Webapp</title>
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-        <nav id="navbar">
+        <nav id="navbar" style="width: 100%;">
+            <!-- correction de la largeur de la navbar. 110%=>100% -->
             <ul>
-                <li><a href="/">Pop-Shop</a></li>
+                <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#produits">Produits</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
-                <li>
-                    <input
-                        type="text"
-                        id="search-box"
-                        placeholder="Rechercher un produit..." />
-                    <button onclick="searchProducts()">Recherche</button>
-                </li>
             </ul>
-
+            <div id="cart-container">
+                <h2>Panier</h2>
+                <div id="cart-items"></div>
+            </div>
             <div id="login-container">
-                <input type="text" id="username" placeholder="Nom d'utilisateur" />
-                <input type="password" id="password" placeholder="Mot de passe" />
+                <input type="text" id="username" placeholder="Nom d'utilisateur">
+                <input type="password" id="password" placeholder="Mot de passe">
                 <button onclick="login()">Connexion</button>
             </div>
 
-            <div id="logout-container" style="display: none">
-                <span id="user-email"></span>
-                <span id="user-role"></span>
+            <div id="welcome-message" style="display: none;">
+                <h2>Bienvenue, <span id="user-name"></span>!</h2>
                 <button onclick="logout()">Déconnexion</button>
             </div>
         </nav>
 
-        <div id="welcome-message" style="display: none">
-            <h2>Bienvenue, <span id="user-name"></span>!</h2>
-        </div>
-
         <div id="container">
             <aside id="sidebar">
-                <div id= "add-categorie" style="display: none;">
-                    <h2>Ajouter une catégorie</h2>
-                    <form id="category-form">
-                        <input type="text" id="category-name" name="categoryName" required>
-                        <button type="button" onclick="addCategory()">Ajouter</button>
-                    </form>
-                </div>
                 <h2>Categories</h2>
                 <div id="categories"></div>
+                <div>
+                    <input type="number" id="maxPrice" placeholder="Prix Maximun">
+                </div>
+                <button onclick="filteredProducts()">Recherche</button>
             </aside>
             <main id="main-content">
-                <section id="admin-section">
-                    <h1>Administration</h1>
-                    <!-- Produits -->
-                    <h3>Produits</h3>
-                    
-                    <!-- Commandes -->
-                    <h3>Commandes</h3>
-                    <h4>Créer une commande</h4>
-                    <form id="create-order-form">
-                        <label for="order-user-id">User ID:</label>
-                        <input type="number" id="order-user-id" name="order-user-id" required><br><br>
-                        <label for="order-date">Date:</label>
-                        <input type="date" id="order-date" name="order-date" required><br><br>
-                        <label for="order-total">Total:</label>
-                        <input type="number" id="order-total" name="order-total" required><br><br>
-                        <button type="button" onclick="createOrder()">Créer Commande</button>
-                    </form>
-
-                    <div id="update-order-form" style="display: none;">
-                        <h4>Modifier une commande</h4>
-                            <label for="edit-order-id">ID de commande:</label>
-                            <input type="number" id="edit-order-id" name="edit-order-id" readonly><br><br>
-                            <label for="edit-order-user-id">User ID:</label>
-                            <input type="text" id="edit-order-user-id" name="edit-order-user-id" required><br><br>
-                            <label for="edit-order-date">Date:</label>
-                            <input type="date" id="edit-order-date" name="edit-order-date" required><br><br>
-                            <label for="edit-order-total">Total:</label>
-                            <input type="number" id="edit-order-total" name="edit-order-total" required><br><br>
-                            <button type="button" onclick="updateOrder()">Mettre à jour Commande</button>
-                        </form>
-                    </div>
-
-                    <h4>Liste des commandes</h4>
-                    <ul id="orders-list"></ul>
-                </section>
+                <div id="search-container">
+                    <input type="text" id="search-box"
+                        placeholder="Rechercher un produit...">
+                    <button onclick="searchProducts()">Recherche</button>
+                </div>
                 <div id="breadcrumb"></div>
                 <section id="produits">
                     <h2>Produits</h2>
                     <div id="liste-produits"></div>
-                    <div id="sectionPaginate">
-                        <div class="pagination" />
-                    </div>
                 </section>
                 <section id="contact">
                     <h2>Contact</h2>
@@ -138,18 +93,17 @@
                         <span class="close-button" onclick="closeAlert()">&times;</span>
                         <p id="alert-message"></p>
                     </div>
-                    <button type="submit">Envoyer</button>
-                </form>
-            </section>
-            
-            <div id="product-detail-modal" class="modal" style="width: 200%;">
-                <div class="modal-content">
-                    <span class="close-button" onClick="closeModal()">&times;</span>
-                    <h2 id="product-detail-name"></h2>
-                    <p id="product-detail-description"></p>
-                    <p id="product-detail-price"></p>
                 </div>
-             </div>
+
+                <div id="product-detail-modal" class="modal"
+                    style="width: 100%;">
+                    <div class="modal-content">
+                        <span class="close-button" onClick="closeModal()">&times;</span>
+                        <h2 id="product-detail-name"></h2>
+                        <p id="product-detail-description"></p>
+                        <p id="product-detail-price"></p>
+                    </div>
+                </div>
             </main>
         </div>
 
@@ -157,11 +111,9 @@
         <script src="/models/product.js"></script>
         <script src="/models/category.js"></script>
         <script src="/models/profile.js"></script>
-        <script src="/models/order.js"></script>
         <script src="../main.js"></script>
 
-        <footer
-            style="position: fixed; bottom: 0; width: 100%; text-align: center;">
+        <footer>
             <p>Version du site : 1.0.0</p>
         </footer>
     </body>
