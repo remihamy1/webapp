@@ -125,7 +125,7 @@ function loadCategories() {
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Supprimer";
-      deleteButton.onclick = () => deleteCategory(category.id, 1);
+      deleteButton.onclick = () => deleteCategory(category.id);
       categoryDiv.appendChild(deleteButton);
 
       categoryDiv.onclick = () => loadProducts(category.id, 1);
@@ -152,7 +152,7 @@ function loadCategories() {
       deleteButton.onclick = () => deleteCategory(category.id);
       categoryDiv.appendChild(deleteButton);
 
-      categoryDiv.onclick = () => loadProducts(category.id);
+      categoryDiv.onclick = () => loadProducts(category.id, 1);
       categoriesDiv.appendChild(categoryDiv);
     });
   });
