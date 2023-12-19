@@ -41,10 +41,14 @@ function login() {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (user) {
       document.getElementById("login-container").style.display = "none";
+      document.getElementById("logout-container").style.display = "block";
       document.getElementById("welcome-message").style.display = "block";
+      document.getElementById("panier").style.display = "block";
       document.getElementById("user-name").textContent = user.username;
     } else {
       document.getElementById("login-container").style.display = "block";
+      document.getElementById("logout-container").style.display = "none";
+      document.getElementById("panier").style.display = "none";
       document.getElementById("welcome-message").style.display = "none";
     }
   }
