@@ -13,7 +13,7 @@ function generateReviewSummary(reviews) {
 
 function updateBreadcrumb(categoryName) {
   const breadcrumbDiv = document.getElementById("breadcrumb");
-  breadcrumbDiv.innerHTML = `<span class="breadcrumb-item">Accueil</span> / <span class="breadcrumb-item">${categoryName}</span>`;
+  breadcrumbDiv.innerHTML = `<span class="breadcrumb-item"><a href="#accueil">Accueil</a></span> / <span class="breadcrumb-item"><a href="#produits">${categoryName}</a</span>`;
 }
 
 loadCategories();
@@ -21,36 +21,40 @@ loadCategories();
 // Appel initial pour vérifier l'état de la session
 updateLoginState();
 
-function CustomAlert(){
-  this.alert = function(message,title){
-    document.body.innerHTML = document.body.innerHTML + '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
-    
-    let dialogoverlay = document.getElementById('dialogoverlay');
-    let dialogbox = document.getElementById('dialogbox');
-    
+function CustomAlert() {
+  this.alert = function (message, title) {
+    document.body.innerHTML =
+      document.body.innerHTML +
+      '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
+
+    let dialogoverlay = document.getElementById("dialogoverlay");
+    let dialogbox = document.getElementById("dialogbox");
+
     let winH = window.innerHeight;
-    dialogoverlay.style.height = winH+"px";
-    
+    dialogoverlay.style.height = winH + "px";
+
     dialogbox.style.top = "100px";
-    
+
     dialogoverlay.style.display = "block";
     dialogbox.style.display = "block";
-    
-    document.getElementById('dialogboxhead').style.display = 'block';
-    
-    if(typeof title === 'undefined') {
-      document.getElementById('dialogboxhead').style.display = 'none';
+
+    document.getElementById("dialogboxhead").style.display = "block";
+
+    if (typeof title === "undefined") {
+      document.getElementById("dialogboxhead").style.display = "none";
     } else {
-      document.getElementById('dialogboxhead').innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ title;
+      document.getElementById("dialogboxhead").innerHTML =
+        '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' + title;
     }
-    document.getElementById('dialogboxbody').innerHTML = message;
-    document.getElementById('dialogboxfoot').innerHTML = '<button class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
-  }
-  
-  this.ok = function(){
-    document.getElementById('dialogbox').style.display = "none";
-    document.getElementById('dialogoverlay').style.display = "none";
-  }
+    document.getElementById("dialogboxbody").innerHTML = message;
+    document.getElementById("dialogboxfoot").innerHTML =
+      '<button class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
+  };
+
+  this.ok = function () {
+    document.getElementById("dialogbox").style.display = "none";
+    document.getElementById("dialogoverlay").style.display = "none";
+  };
 }
 
 let customAlert = new CustomAlert();
@@ -126,7 +130,7 @@ function closeModal() {
   document.getElementById("product-detail-modal").style.display = "none";
 }
 
-updatePageForRole()
+updatePageForRole();
 
 // Appel initial pour afficher les commandes existantes
 displayOrders();
