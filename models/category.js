@@ -111,62 +111,58 @@ class Category {
 }
 
 function loadCategories() {
-  Category.getAll()
-    .then((categories) => {
-      const categoriesDiv = document.getElementById("categories");
-      categoriesDiv.innerHTML = "";
-      categories.forEach((category) => {
+  Category.getAll().then((categories) => {
+    const categoriesDiv = document.getElementById("categories");
+    categoriesDiv.innerHTML = "";
+    categories.forEach((category) => {
+      const categoryDiv = document.createElement("div");
+      categoryDiv.className = "category";
+      categoryDiv.id = "category_" + category.id;
 
-        const categoryDiv = document.createElement("div");
-        categoryDiv.className = "category";
-        categoryDiv.id = "category_" + category.id;
+      const categoryName = document.createElement("span");
+      categoryName.textContent = category.name;
+      categoryDiv.appendChild(categoryName);
 
-        const categoryName = document.createElement("span");
-        categoryName.textContent = category.name;
-        categoryDiv.appendChild(categoryName);
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Supprimer";
+      deleteButton.onclick = () => deleteCategory(category.id, 1);
+      categoryDiv.appendChild(deleteButton);
 
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Supprimer";
-        deleteButton.onclick = () => deleteCategory(category.id);
-        categoryDiv.appendChild(deleteButton);
-
-        categoryDiv.onclick = () => loadProducts(category.id);
-        categoriesDiv.appendChild(categoryDiv);
-      });
+      categoryDiv.onclick = () => loadProducts(category.id, 1);
+      categoriesDiv.appendChild(categoryDiv);
     });
+  });
 }
 
 function loadCategories() {
-  Category.getAll()
-    .then((categories) => {
-      const categoriesDiv = document.getElementById("categories");
-      categoriesDiv.innerHTML = "";
-      categories.forEach((category) => {
+  Category.getAll().then((categories) => {
+    const categoriesDiv = document.getElementById("categories");
+    categoriesDiv.innerHTML = "";
+    categories.forEach((category) => {
+      const categoryDiv = document.createElement("div");
+      categoryDiv.className = "category-container";
 
-        const categoryDiv = document.createElement("div");
-        categoryDiv.className = "category-container";
+      const categoryName = document.createElement("span");
+      categoryName.textContent = category.name;
+      categoryDiv.appendChild(categoryName);
 
-        const categoryName = document.createElement("span");
-        categoryName.textContent = category.name;
-        categoryDiv.appendChild(categoryName);
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Supprimer";
+      deleteButton.className = "delete-button-category";
+      deleteButton.onclick = () => deleteCategory(category.id);
+      categoryDiv.appendChild(deleteButton);
 
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Supprimer";
-        deleteButton.className = "delete-button-category";
-        deleteButton.onclick = () => deleteCategory(category.id);
-        categoryDiv.appendChild(deleteButton);
-
-        categoryDiv.onclick = () => loadProducts(category.id);
-        categoriesDiv.appendChild(categoryDiv);
-      });
+      categoryDiv.onclick = () => loadProducts(category.id);
+      categoriesDiv.appendChild(categoryDiv);
     });
+  });
 }
 
 async function addCategory() {
-  const categoryNameInput = document.getElementById('category-name');
+  const categoryNameInput = document.getElementById("category-name");
   const newCategory = new Category(categoryNameInput.value);
 
-  await newCategory.save(); 
+  await newCategory.save();
   loadCategories();
 }
 
