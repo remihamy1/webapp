@@ -70,25 +70,32 @@ function loadProducts(categoryId) {
 }
 
 function searchProducts() {
+  currentPage = 1;
+  const productsDiv = document.getElementById("liste-produits");
+
   const searchText = document.getElementById("search-box").value.toLowerCase();
   fetch(`${baseUrl}/products`)
     .then((response) => response.json())
     .then((products) => {
       const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(searchText)
+        product.name.toLowerCase().startsWith(searchText)
       );
 
-      const productsDiv = document.getElementById("liste-produits");
-      productsDiv.innerHTML = "";
-      const fetchPromises = filteredProducts.map((product) => {
-        return fetch(`${baseUrl}/reviews?productId=${product.id}`)
-          .then((response) => response.json())
-          .then((reviews) => {
-            const productDiv = generateProductDiv(product, reviews);
-            productsDiv.appendChild(productDiv);
-          });
-      });
-      Promise.all(fetchPromises).then(() => {});
+      if (filteredProducts.length == 0) {
+        alert("Aucun produit trouvé commençant par ce nom");
+      } else {
+        const fetchPromises = filteredProducts.map((product) => {
+          return fetch(`${baseUrl}/reviews?productId=${product.id}`)
+            .then((response) => response.json())
+            .then((reviews) => {
+              const productDiv = generateProductDiv(product, reviews);
+              productsDiv.appendChild(productDiv);
+            });
+        });
+        Promise.all(fetchPromises).then(() => {});
+      }
+      const paginationDiv = document.querySelector(".pagination");
+      paginationDiv.innerHTML = ""; // Clear existing pagination controls
     });
 }
 
