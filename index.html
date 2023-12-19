@@ -1,168 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pop-Shop</title>
-        <link rel="stylesheet" href="../style.css">
-    </head>
-    <body>
-        <nav id="navbar">
-            <ul>
-                <li><a href="/">Pop-Shop</a></li>
-                <li><a href="#produits">Produits</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li id="panier" style="display: none"><a href="#panier">Panier</a></li>
-                <li>
-                    <input
-                        type="text"
-                        id="search-box"
-                        placeholder="Rechercher un produit..." />
-                    <button onclick="searchProducts()">Recherche</button>
-                </li>
-            </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webapp</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <nav id="navbar" style="width: 100%">
+      <!-- correction de la largeur de la navbar. 110%=>100% -->
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div id="cart-container">
+        <h2>Panier</h2>
+        <div id="cart-items"></div>
+      </div>
+      <div id="login-container">
+        <input type="text" id="username" placeholder="Nom d'utilisateur" />
+        <input type="password" id="password" placeholder="Mot de passe" />
+        <button onclick="login()">Connexion</button>
 
-            <div id="login-container">
-                <input type="text" id="username" placeholder="Nom d'utilisateur" />
-                <input type="password" id="password" placeholder="Mot de passe" />
-                <button onclick="login()">Connexion</button>
+        <!-- Bouton pour ouvrir la popup d'inscription -->
+        <button id="open-register-popup">Inscription</button>
+
+        <!-- Popup d'inscription -->
+        <div id="register-popup" class="modal">
+          <div class="modal-content">
+            <span
+              class="close"
+              style="color: black"
+              onclick="closeRegisterPopup()"
+              >&times;</span
+            >
+            <form id="register-form">
+              <input
+                type="text"
+                id="register-username"
+                placeholder="Nom d'utilisateur"
+                required
+              />
+              <input
+                type="email"
+                id="register-email"
+                placeholder="Email"
+                required
+              />
+              <input
+                type="password"
+                id="register-password"
+                placeholder="Mot de passe"
+                required
+              />
+              <input
+                type="password"
+                id="register-password-confirm"
+                placeholder="Confirmez le mot de passe"
+                required
+              />
+              <button type="submit">S'inscrire</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="welcome-message" style="display: none;">
+        <h2>Bienvenue, <span id="user-name"></span>!</h2>
+        <button onclick="logout()">Déconnexion</button>
+      </div>
+    </nav>
+
+    <div id="container">
+      <aside id="sidebar">
+        <h2>Categories</h2>
+        <div id="categories"></div>
+      </aside>
+      <main id="main-content">
+        <div id="search-container">
+          <input type="text" id="search-box" placeholder="Rechercher un produit..."/>
+          <button onclick="searchProducts()">Recherche</button>
+        </div>
+        <div id="breadcrumb"></div>
+        <section id="produits">
+          <h2>Produits</h2>
+          <div id="liste-produits"></div>
+        </section>
+        <section id="contact">
+          <h2>Contact</h2>
+          <button id="show-contact-form-button" onclick="showContactForm()">
+            Faire une demande
+          </button>
+          <form
+            id="contact-form"
+            style="display: none"
+            onsubmit="submitContactForm(event)"
+          >
+            <div>
+              <label for="lastname">Nom :</label>
+              <input type="text" id="lastname" name="lastname" required />
             </div>
-
-            <div id="logout-container" style="display: none">
-                <span id="user-email"></span>
-                <span id="user-role"></span>
-                <button onclick="logout()">Déconnexion</button>
+            <div>
+              <label for="firstname">Prénom :</label>
+              <input type="text" id="firstname" name="firstname" required />
             </div>
-        </nav>
+            <div>
+              <label for="email">Email :</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div id="order-number-field" style="display: none">
+              <label for="order-number">Numéro de commande :</label>
+              <select id="order-number" name="order-number"></select>
+            </div>
+            <div>
+              <label for="subject">Sujet de la demande :</label>
+              <input type="text" id="subject" name="subject" />
+            </div>
+            <div>
+              <label for="message">Message :</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Envoyer</button>
+          </form>
+        </section>
 
-        <div id="welcome-message" style="display: none">
-            <h2>Bienvenue, <span id="user-name"></span>!</h2>
+        <!-- Composant Alert -->
+        <div id="custom-alert" class="alert">
+          <div class="alert-content">
+            <span class="close-button" onclick="closeAlert()">&times;</span>
+            <p id="alert-message"></p>
+          </div>
         </div>
 
-        <div id="container">
-            <aside id="sidebar">
-                <div id= "add-categorie" style="display: none;">
-                    <h2>Ajouter une catégorie</h2>
-                    <form id="category-form">
-                        <input type="text" id="category-name" name="categoryName" required>
-                        <button type="button" onclick="addCategory()">Ajouter</button>
-                    </form>
-                </div>
-                <h2>Categories</h2>
-                <div id="categories"></div>
-            </aside>
-            <main id="main-content">
-                <section id="admin-section">
-                    <h1>Administration</h1>
-                    <!-- Produits -->
-                    <h3>Produits</h3>
-                    
-                    <!-- Commandes -->
-                    <h3>Commandes</h3>
-                    <h4>Créer une commande</h4>
-                    <form id="create-order-form">
-                        <label for="order-user-id">User ID:</label>
-                        <input type="number" id="order-user-id" name="order-user-id" required><br><br>
-                        <label for="order-date">Date:</label>
-                        <input type="date" id="order-date" name="order-date" required><br><br>
-                        <label for="order-total">Total:</label>
-                        <input type="number" id="order-total" name="order-total" required><br><br>
-                        <button type="button" onclick="createOrder()">Créer Commande</button>
-                    </form>
-
-                    <div id="update-order-form" style="display: none;">
-                        <h4>Modifier une commande</h4>
-                            <label for="edit-order-id">ID de commande:</label>
-                            <input type="number" id="edit-order-id" name="edit-order-id" readonly><br><br>
-                            <label for="edit-order-user-id">User ID:</label>
-                            <input type="text" id="edit-order-user-id" name="edit-order-user-id" required><br><br>
-                            <label for="edit-order-date">Date:</label>
-                            <input type="date" id="edit-order-date" name="edit-order-date" required><br><br>
-                            <label for="edit-order-total">Total:</label>
-                            <input type="number" id="edit-order-total" name="edit-order-total" required><br><br>
-                            <button type="button" onclick="updateOrder()">Mettre à jour Commande</button>
-                        </form>
-                    </div>
-
-                    <h4>Liste des commandes</h4>
-                    <ul id="orders-list"></ul>
-                </section>
-                <div id="breadcrumb"></div>
-                <section id="produits">
-                    <h2>Produits</h2>
-                    <div id="liste-produits"></div>
-                    <div id="sectionPaginate">
-                        <div class="pagination" />
-                    </div>
-                </section>
-                <section id="contact">
-                    <h2>Contact</h2>
-                    <button id="show-contact-form-button"
-                        onclick="showContactForm()">Faire une demande</button>
-                    <form id="contact-form" style="display: none;"
-                        onsubmit="submitContactForm(event)">
-                        <div>
-                            <label for="lastname">Nom :</label>
-                            <input type="text" id="lastname" name="lastname"
-                                required>
-                        </div>
-                        <div>
-                            <label for="firstname">Prénom :</label>
-                            <input type="text" id="firstname" name="firstname"
-                                required>
-                        </div>
-                        <div>
-                            <label for="email">Email :</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div id="order-number-field" style="display: none;">
-                            <label for="order-number">Numéro de commande :</label>
-                            <select id="order-number" name="order-number">
-                            </select>
-                        </div>
-                        <div>
-                            <label for="subject">Sujet de la demande :</label>
-                            <input type="text" id="subject" name="subject">
-                        </div>
-                        <div>
-                            <label for="message">Message :</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit">Envoyer</button>
-                    </form>
-                </section>
-
-                <!-- Composant Alert -->
-                <div id="custom-alert" class="alert">
-                    <div class="alert-content">
-                        <span class="close-button" onclick="closeAlert()">&times;</span>
-                        <p id="alert-message"></p>
-                    </div>
-                    <button type="submit">Envoyer</button>
-                </form>
-            </section>
-            
-            <div id="product-detail-modal" class="modal" style="width: 200%;">
-                <div class="modal-content">
-                    <span class="close-button" onClick="closeModal()">&times;</span>
-                    <h2 id="product-detail-name"></h2>
-                    <p id="product-detail-description"></p>
-                    <p id="product-detail-price"></p>
-                </div>
-             </div>
-            </main>
+        <div id="product-detail-modal" class="modal" style="width: 100%;">
+          <div class="modal-content">
+            <span class="close-button" onClick="closeModal()">&times;</span>
+            <h2 id="product-detail-name"></h2>
+            <p id="product-detail-description"></p>
+            <p id="product-detail-price"></p>
+          </div>
         </div>
+      </main>
+    </div>
 
-        <script src="/models/cart.js"></script>
-        <script src="/models/product.js"></script>
-        <script src="/models/category.js"></script>
-        <script src="/models/profile.js"></script>
-        <script src="/models/order.js"></script>
-        <script src="../main.js"></script>
+    <script src="/models/cart.js"></script>
+    <script src="/models/product.js"></script>
+    <script src="/models/category.js"></script>
+    <script src="/models/profile.js"></script>
+    <script src="../main.js"></script>
 
-        <footer
-            style="position: fixed; bottom: 0; width: 100%; text-align: center;">
-            <p>Version du site : 1.0.0</p>
-        </footer>
-    </body>
+    <footer>
+      <p>Version du site : 1.0.0</p>
+    </footer>
+  </body>
 </html>
