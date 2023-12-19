@@ -17,7 +17,7 @@ function login() {
 
         sessionStorage.setItem(
           "user",
-          JSON.stringify({ username: username, id: currentUser.id })
+          JSON.stringify({ username: username, id: currentUser.id, email: currentUser.email, role: currentUser.role})
         );
         updateLoginState();
       } else {
@@ -45,6 +45,9 @@ function updateLoginState() {
     document.getElementById("welcome-message").style.display = "block";
     document.getElementById("panier").style.display = "block";
     document.getElementById("user-name").textContent = user.username;
+    document.getElementById("user-email").textContent = user.email;
+    document.getElementById("user-role").textContent = user.role;
+
   } else {
     document.getElementById("login-container").style.display = "block";
     document.getElementById("logout-container").style.display = "none";

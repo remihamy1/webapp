@@ -35,7 +35,7 @@ footer p {
 }
 
 #navbar ul li {
-  margin: 0 20px;
+  margin: auto 20px;
 }
 
 #navbar ul li a {
@@ -305,4 +305,8 @@ button:hover {
 
 #sectionPaginate {
   text-align: center;
+}
+
+#user-email, #user-role{
+  margin-right: 10px;
 }
