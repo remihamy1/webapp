@@ -162,19 +162,18 @@ function loadCategories() {
     });
 }
 
-function addCategory() {
-
+async function addCategory() {
   const categoryNameInput = document.getElementById('category-name');
   const newCategory = new Category(categoryNameInput.value);
 
-  newCategory.save();
-  window.location.reload();
+  await newCategory.save(); 
+  loadCategories();
 }
 
-function deleteCategory(categoryId) {
+async function deleteCategory(categoryId) {
   const category = new Category();
   category.id = categoryId;
 
-  category.delete();
-  window.location.reload();
+  await category.delete();
+  loadCategories();
 }
