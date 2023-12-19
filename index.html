@@ -1,116 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Webapp</title>
-        <link rel="stylesheet" href="../style.css">
-    </head>
-    <body>
-        <nav id="navbar" style="width: 100%;">
-            <!-- correction de la largeur de la navbar. 110%=>100% -->
-            <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#produits">Produits</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div id="cart-container">
-                <h2>Panier</h2>
-                <div id="cart-items"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webapp</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <nav id="navbar" style="width: 100%">
+      <!-- correction de la largeur de la navbar. 110%=>100% -->
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div id="cart-container">
+        <h2>Panier</h2>
+        <div id="cart-items"></div>
+      </div>
+      <div id="login-container">
+        <input type="text" id="username" placeholder="Nom d'utilisateur" />
+        <input type="password" id="password" placeholder="Mot de passe" />
+        <button onclick="login()">Connexion</button>
+      </div>
+
+      <div id="welcome-message" style="display: none">
+        <h2>Bienvenue, <span id="user-name"></span>!</h2>
+        <button onclick="logout()">Déconnexion</button>
+      </div>
+    </nav>
+
+    <div id="container">
+      <aside id="sidebar">
+        <h2>Categories</h2>
+        <div id="categories"></div>
+      </aside>
+      <main id="main-content">
+        <div id="search-container">
+          <input
+            type="text"
+            id="search-box"
+            placeholder="Rechercher un produit..."
+          />
+          <button onclick="searchProducts()">Recherche</button>
+        </div>
+        <div id="breadcrumb"></div>
+        <section id="admin-section">
+          <h1>Administration</h1>
+
+          <!-- Produits -->
+          <h3>Produits</h3>
+          <h4>Créer un produit</h4>
+            <form id="create-product-form">
+                <label for="name">Name:</label>
+                <input type="name" id="name" name="name" required><br><br>
+                
+                <label for="description">Description:</label>
+                <input type="description" id="description" name="description" required><br><br>
+                
+                <label for="price">Price:</label>
+                <input type="price" id="price" name="price" required><br><br>
+
+                <label for="categoryId">CategoryId:</label>
+                <input type="categoryId" id="categoryId" name="categoryId" required><br><br>
+                
+                <button type="button" onclick="createdProducts()">Créer des produits</button>
+            </form>
+
+            <h4>Modifier un produit</h4>
+            <button type="button" onclick="updateproduct()">Mettre à jour</button>
+            <div id="update-product-form" style="display: none;">
+                <h4>Modifier un produit</h4>
+                    <label for="edit-product-id">ID de Produit:</label>
+                    <input type="number" id="edit-product-id" name="edit-product-id" readonly><br><br>
+                   
+                    <label for="edit-product-name">Name:</label>
+                    <input type="text" id="edit-product-name" name="edit-product-name" required><br><br>
+                    
+                    <label for="edit-product-description">Description:</label>
+                    <input type="date" id="edit-product-description" name="edit-product-description" required><br><br>
+                    
+                    <label for="edit-product-price">Price:</label>
+                    <input type="number" id="edit-product-price" name="edit-product-price" required><br><br>
+                    
+                    <label for="edit-product-categoryId">CategoryId:</label>
+                    <input type="number" id="edit-product-categoryId" name="edit-product-categoryId" required><br><br>
+
+                    <button type="button" onclick="updateproduct()">Mettre à jour</button>
+                </form>
             </div>
-            <div id="login-container">
-                <input type="text" id="username" placeholder="Nom d'utilisateur">
-                <input type="password" id="password" placeholder="Mot de passe">
-                <button onclick="login()">Connexion</button>
+
+            <h4>Liste des commandes</h4>
+            <ul id="products-list"></ul>
+
+          <!-- Commandes -->
+          <h3>Commandes</h3>
+
+          <!-- Categories -->
+          <h3>Categories</h3>
+        </section>
+        <section id="produits">
+          <h2>Produits</h2>
+          <div id="liste-produits"></div>
+        </section>
+        <section id="contact">
+          <h2>Contact</h2>
+          <button id="show-contact-form-button" onclick="showContactForm()">
+            Faire une demande
+          </button>
+          <form
+            id="contact-form"
+            style="display: none"
+            onsubmit="submitContactForm(event)">
+            <div>
+              <label for="lastname">Nom :</label>
+              <input type="text" id="lastname" name="lastname" required />
             </div>
-
-            <div id="welcome-message" style="display: none;">
-                <h2>Bienvenue, <span id="user-name"></span>!</h2>
-                <button onclick="logout()">Déconnexion</button>
+            <div>
+              <label for="firstname">Prénom :</label>
+              <input type="text" id="firstname" name="firstname" required />
             </div>
-        </nav>
+            <div>
+              <label for="email">Email :</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div id="order-number-field" style="display: none">
+              <label for="order-number">Numéro de commande :</label>
+              <select id="order-number" name="order-number"></select>
+            </div>
+            <div>
+              <label for="subject">Sujet de la demande :</label>
+              <input type="text" id="subject" name="subject" />
+            </div>
+            <div>
+              <label for="message">Message :</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Envoyer</button>
+          </form>
+        </section>
 
-        <div id="container">
-            <aside id="sidebar">
-                <h2>Categories</h2>
-                <div id="categories"></div>
-            </aside>
-            <main id="main-content">
-                <div id="search-container">
-                    <input type="text" id="search-box"
-                        placeholder="Rechercher un produit...">
-                    <button onclick="searchProducts()">Recherche</button>
-                </div>
-                <div id="breadcrumb"></div>
-                <section id="produits">
-                    <h2>Produits</h2>
-                    <div id="liste-produits"></div>
-                </section>
-                <section id="contact">
-                    <h2>Contact</h2>
-                    <button id="show-contact-form-button"
-                        onclick="showContactForm()">Faire une demande</button>
-                    <form id="contact-form" style="display: none;"
-                        onsubmit="submitContactForm(event)">
-                        <div>
-                            <label for="lastname">Nom :</label>
-                            <input type="text" id="lastname" name="lastname"
-                                required>
-                        </div>
-                        <div>
-                            <label for="firstname">Prénom :</label>
-                            <input type="text" id="firstname" name="firstname"
-                                required>
-                        </div>
-                        <div>
-                            <label for="email">Email :</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div id="order-number-field" style="display: none;">
-                            <label for="order-number">Numéro de commande :</label>
-                            <select id="order-number" name="order-number">
-                            </select>
-                        </div>
-                        <div>
-                            <label for="subject">Sujet de la demande :</label>
-                            <input type="text" id="subject" name="subject">
-                        </div>
-                        <div>
-                            <label for="message">Message :</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit">Envoyer</button>
-                    </form>
-                </section>
-
-                <!-- Composant Alert -->
-                <div id="custom-alert" class="alert">
-                    <div class="alert-content">
-                        <span class="close-button" onclick="closeAlert()">&times;</span>
-                        <p id="alert-message"></p>
-                    </div>
-                </div>
-
-                <div id="product-detail-modal" class="modal"
-                    style="width: 100%;">
-                    <div class="modal-content">
-                        <span class="close-button" onClick="closeModal()">&times;</span>
-                        <h2 id="product-detail-name"></h2>
-                        <p id="product-detail-description"></p>
-                        <p id="product-detail-price"></p>
-                    </div>
-                </div>
-            </main>
+        <!-- Composant Alert -->
+        <div id="custom-alert" class="alert">
+          <div class="alert-content">
+            <span class="close-button" onclick="closeAlert()">&times;</span>
+            <p id="alert-message"></p>
+          </div>
         </div>
 
-        <script src="/models/cart.js"></script>
-        <script src="/models/product.js"></script>
-        <script src="/models/category.js"></script>
-        <script src="/models/profile.js"></script>
-        <script src="../main.js"></script>
+        <div id="product-detail-modal" class="modal" style="width: 100%">
+          <div class="modal-content">
+            <span class="close-button" onClick="closeModal()">&times;</span>
+            <h2 id="product-detail-name"></h2>
+            <p id="product-detail-description"></p>
+            <p id="product-detail-price"></p>
+          </div>
+        </div>
+      </main>
+    </div>
 
-        <footer>
-            <p>Version du site : 1.0.0</p>
-        </footer>
-    </body>
+    <script src="/models/cart.js"></script>
+    <script src="/models/product.js"></script>
+    <script src="/models/category.js"></script>
+    <script src="/models/products.js"></script>
+    <script src="/models/profile.js"></script>
+    <script src="../main.js"></script>
+
+    <footer>
+      <p>Version du site : 1.0.0</p>
+    </footer>
+  </body>
 </html>

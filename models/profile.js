@@ -17,8 +17,8 @@ function login() {
   
           sessionStorage.setItem(
             "user",
-            JSON.stringify({ username: username, id: currentUser.id })
-          );
+            JSON.stringify({ username: username, id: currentUser.id, email: currentUser.email, role: currentUser.role})
+            );
           updateLoginState();
         } else {
           alert("Échec de la connexion.");
@@ -29,6 +29,18 @@ function login() {
   function getCurrentUser() {
     const user = JSON.parse(sessionStorage.getItem("user"));
     return user; // Renvoie true si un utilisateur est connecté, sinon false
+  }
+  
+  function updatePageForRole() {
+    const currentUser = getCurrentUser();
+
+    const adminNavSections = document.getElementById('admin-section');
+
+    if (currentUser && currentUser.role === 'admin') {
+        adminNavSections.style.display = 'block';
+    } else {
+        adminNavSections.style.display = 'none';
+    }
   }
   
   function validatePassword(password) {

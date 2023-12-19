@@ -100,3 +100,5 @@ function closeAlert() {
 function closeModal() {
   document.getElementById("product-detail-modal").style.display = "none";
 }
+
+updatePageForRole()
