@@ -531,3 +531,41 @@ button:hover {
 #user-email, #user-role{
   margin-right: 10px;
 }
+/* Style pour les champs de formulaire dans la popup */
+#register-form input[type="text"],
+#register-form input[type="email"],
+#register-form input[type="password"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#register-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+#register-form button:hover {
+  opacity: 0.8;
+}
+
+.closePopUp {
+  margin-left: 98%;
+  font-weight: bold;
+}
+
+.closePopUp:hover,
+.closePopUp:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
