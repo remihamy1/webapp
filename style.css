@@ -61,6 +61,7 @@ footer p {
     flex: 3;
     padding: 20px;
     transition: background-color 0.3s ease;
+    padding-bottom: calc(100px);
 }
 
 .category, .product {
