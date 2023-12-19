@@ -8,6 +8,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
+
 footer {
   text-align: center;
   padding-top: 10px; /*Erreur liée au padding. Remplacement de padding 20px par padding-top 10px et padding-bottom 10px*/
@@ -123,11 +124,11 @@ button:hover {
 }
 
 .breadcrumb-item {
-  display: inline;
-  margin-right: 5px;
-  color: #3498db;
-  cursor: pointer;
-  transition: color 0.3s ease;
+    display: inline;
+    margin-right: 5px;
+    color: #3498db;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .breadcrumb-item:hover {
@@ -140,11 +141,11 @@ button:hover {
 }
 
 .product-item {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  transition: transform 0.3s ease;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
 }
 
 .product-item:hover {

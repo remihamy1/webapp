@@ -125,3 +125,8 @@ function showContactForm() {
 function closeModal() {
   document.getElementById("product-detail-modal").style.display = "none";
 }
+
+updatePageForRole()
+
+// Appel initial pour afficher les commandes existantes
+displayOrders();
