@@ -13,7 +13,7 @@ function generateReviewSummary(reviews) {
 
 function updateBreadcrumb(categoryName) {
   const breadcrumbDiv = document.getElementById("breadcrumb");
-  breadcrumbDiv.innerHTML = `<span class="breadcrumb-item">Accueil</span> / <span class="breadcrumb-item">${categoryName}</span>`;
+  breadcrumbDiv.innerHTML = `<span class="breadcrumb-item"><a href="#accueil">Accueil</a></span> / <span class="breadcrumb-item"><a href="#produits">${categoryName}</a</span>`;
 }
 
 loadCategories();
