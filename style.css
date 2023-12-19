@@ -18,13 +18,15 @@ footer p {
   margin: 0;
   color: #333;
 }
+
 #navbar {
   background-color: #333;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
 #navbar ul {
@@ -41,25 +43,6 @@ footer p {
 #navbar ul li a {
   color: white;
   text-decoration: none;
-  font-size: 16px;
-}
-
-input[type="text"],
-input[type="password"] {
-  padding: 8px;
-  margin-right: 10px;
-}
-
-button {
-  padding: 8px 12px;
-  background-color: #555;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #777;
 }
 
 #container {
@@ -78,7 +61,6 @@ button:hover {
   flex: 3;
   padding: 20px;
   transition: background-color 0.3s ease;
-  padding-bottom: calc(100px);
 }
 
 .category,
@@ -98,10 +80,6 @@ button:hover {
   transform: scale(1.05);
 }
 
-.category:hover {
-  transform: scale(1.05);
-}
-
 #breadcrumb {
   margin-bottom: 20px;
   transition: color 0.3s ease;
@@ -113,6 +91,33 @@ button:hover {
   color: #3498db;
   cursor: pointer;
   transition: color 0.3s ease;
+}
+
+/* Pagination */
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #a3a3a3;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+#sectionPaginate {
+  text-align: center;
 }
 
 .breadcrumb-item:hover {
@@ -209,43 +214,6 @@ button:hover {
   color: #333;
 }
 
-/* Style de l'alert */
-.alert {
-  display: none; /* Initialement cachée */
-  position: fixed; /* Position fixée pour l'alert */
-  top: 50%; /* Centrage vertical */
-  left: 50%; /* Centrage horizontal */
-  transform: translate(-50%, -50%); /* Centrage absolu */
-  background-color: #fff; /* Couleur de fond */
-  border: 1px solid #ccc; /* Bordure */
-  border-radius: 5px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
-  padding: 20px; /* Espacement intérieur */
-  max-width: 400px; /* Largeur maximale */
-}
-
-/* Style pour le bouton de fermeture */
-.alert-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #888;
-}
-
-/* Style pour le contenu de la alert */
-.alert-content {
-  margin-top: 20px; /* Espacement du haut */
-}
-
-/* Style pour le message */
-.alert-message {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-}
-
 .close-button {
   color: #aaa;
   float: right;
@@ -270,7 +238,7 @@ button:hover {
 
   #cart-container,
   #login-container,
-  #login-container {
+  #welcome-message {
     flex-direction: column;
     align-items: center;
   }
@@ -280,29 +248,69 @@ button:hover {
     width: 100%;
   }
 }
-/* Pagination */
-.pagination {
-  display: inline-block;
+
+/* Style pour la popup d'inscription */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.pagination a {
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
   color: black;
-  float: left;
-  padding: 8px 16px;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.pagination a.active {
-  background-color: #a3a3a3;
+/* Style pour les champs de formulaire dans la popup */
+#register-form input[type="text"],
+#register-form input[type="email"],
+#register-form input[type="password"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#register-form button {
+  background-color: #4caf50;
   color: white;
-  border-radius: 5px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }
 
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
-  border-radius: 5px;
-}
-
-#sectionPaginate {
-  text-align: center;
+#register-form button:hover {
+  opacity: 0.8;
 }
