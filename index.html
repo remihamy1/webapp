@@ -39,6 +39,13 @@
 
         <div id="container">
             <aside id="sidebar">
+                <div id= "add-categorie" style="display: none;">
+                    <h2>Ajouter une catégorie</h2>
+                    <form id="category-form">
+                        <input type="text" id="category-name" name="categoryName" required>
+                        <button type="button" onclick="addCategory()">Ajouter</button>
+                    </form>
+                </div>
                 <h2>Categories</h2>
                 <div id="categories"></div>
             </aside>
