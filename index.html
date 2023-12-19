@@ -1,157 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webapp</title>
-    <link rel="stylesheet" href="../style.css" />
-  </head>
-  <body>
-    <nav id="navbar" style="width: 100%">
-      <!-- correction de la largeur de la navbar. 110%=>100% -->
-      <ul>
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#produits">Produits</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <div id="cart-container">
-        <h2>Panier</h2>
-        <div id="cart-items"></div>
-      </div>
-      <div id="login-container">
-        <input type="text" id="username" placeholder="Nom d'utilisateur" />
-        <input type="password" id="password" placeholder="Mot de passe" />
-        <button onclick="login()">Connexion</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webapp</title>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <nav id="navbar" style="width: 100%;">
+            <!-- correction de la largeur de la navbar. 110%=>100% -->
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#produits">Produits</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div id="cart-container">
+                <h2>Panier</h2>
+                <div id="cart-items"></div>
+            </div>
+            <div id="login-container">
+                <input type="text" id="username" placeholder="Nom d'utilisateur">
+                <input type="password" id="password" placeholder="Mot de passe">
+                <button onclick="login()">Connexion</button>
+            </div>
 
-        <!-- Bouton pour ouvrir la popup d'inscription -->
-        <button id="open-register-popup">Inscription</button>
+            <div id="welcome-message" style="display: none;">
+                <h2>Bienvenue, <span id="user-name"></span>!</h2>
+                <button onclick="logout()">Déconnexion</button>
+            </div>
+        </nav>
 
-        <!-- Popup d'inscription -->
-        <div id="register-popup" class="modal">
-          <div class="modal-content">
-            <span
-              class="close"
-              style="color: black"
-              onclick="closeRegisterPopup()"
-              >&times;</span
-            >
-            <form id="register-form">
-              <input
-                type="text"
-                id="register-username"
-                placeholder="Nom d'utilisateur"
-                required
-              />
-              <input
-                type="email"
-                id="register-email"
-                placeholder="Email"
-                required
-              />
-              <input
-                type="password"
-                id="register-password"
-                placeholder="Mot de passe"
-                required
-              />
-              <input
-                type="password"
-                id="register-password-confirm"
-                placeholder="Confirmez le mot de passe"
-                required
-              />
-              <button type="submit">S'inscrire</button>
-            </form>
-          </div>
-        </div>
-      </div>
+        <div id="container">
+            <aside id="sidebar">
+                <h2>Categories</h2>
+                <div id="categories"></div>
+                <div>
+                    <input type="number" id="maxPrice" placeholder="Prix Maximun">
+                </div>
+                <button onclick="filteredProducts()">Recherche</button>
+            </aside>
+            <main id="main-content">
+                <div id="search-container">
+                    <input type="text" id="search-box"
+                        placeholder="Rechercher un produit...">
+                    <button onclick="searchProducts()">Recherche</button>
+                </div>
+                <div id="breadcrumb"></div>
+                <section id="produits">
+                    <h2>Produits</h2>
+                    <div id="liste-produits"></div>
+                </section>
+                <section id="contact">
+                    <h2>Contact</h2>
+                    <button id="show-contact-form-button"
+                        onclick="showContactForm()">Faire une demande</button>
+                    <form id="contact-form" style="display: none;"
+                        onsubmit="submitContactForm(event)">
+                        <div>
+                            <label for="lastname">Nom :</label>
+                            <input type="text" id="lastname" name="lastname"
+                                required>
+                        </div>
+                        <div>
+                            <label for="firstname">Prénom :</label>
+                            <input type="text" id="firstname" name="firstname"
+                                required>
+                        </div>
+                        <div>
+                            <label for="email">Email :</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div id="order-number-field" style="display: none;">
+                            <label for="order-number">Numéro de commande :</label>
+                            <select id="order-number" name="order-number">
+                            </select>
+                        </div>
+                        <div>
+                            <label for="subject">Sujet de la demande :</label>
+                            <input type="text" id="subject" name="subject">
+                        </div>
+                        <div>
+                            <label for="message">Message :</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </section>
 
-      <div id="welcome-message" style="display: none;">
-        <h2>Bienvenue, <span id="user-name"></span>!</h2>
-        <button onclick="logout()">Déconnexion</button>
-      </div>
-    </nav>
+                <!-- Composant Alert -->
+                <div id="custom-alert" class="alert">
+                    <div class="alert-content">
+                        <span class="close-button" onclick="closeAlert()">&times;</span>
+                        <p id="alert-message"></p>
+                    </div>
+                </div>
 
-    <div id="container">
-      <aside id="sidebar">
-        <h2>Categories</h2>
-        <div id="categories"></div>
-      </aside>
-      <main id="main-content">
-        <div id="search-container">
-          <input type="text" id="search-box" placeholder="Rechercher un produit..."/>
-          <button onclick="searchProducts()">Recherche</button>
-        </div>
-        <div id="breadcrumb"></div>
-        <section id="produits">
-          <h2>Produits</h2>
-          <div id="liste-produits"></div>
-        </section>
-        <section id="contact">
-          <h2>Contact</h2>
-          <button id="show-contact-form-button" onclick="showContactForm()">
-            Faire une demande
-          </button>
-          <form
-            id="contact-form"
-            style="display: none"
-            onsubmit="submitContactForm(event)"
-          >
-            <div>
-              <label for="lastname">Nom :</label>
-              <input type="text" id="lastname" name="lastname" required />
-            </div>
-            <div>
-              <label for="firstname">Prénom :</label>
-              <input type="text" id="firstname" name="firstname" required />
-            </div>
-            <div>
-              <label for="email">Email :</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div id="order-number-field" style="display: none">
-              <label for="order-number">Numéro de commande :</label>
-              <select id="order-number" name="order-number"></select>
-            </div>
-            <div>
-              <label for="subject">Sujet de la demande :</label>
-              <input type="text" id="subject" name="subject" />
-            </div>
-            <div>
-              <label for="message">Message :</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit">Envoyer</button>
-          </form>
-        </section>
-
-        <!-- Composant Alert -->
-        <div id="custom-alert" class="alert">
-          <div class="alert-content">
-            <span class="close-button" onclick="closeAlert()">&times;</span>
-            <p id="alert-message"></p>
-          </div>
+                <div id="product-detail-modal" class="modal"
+                    style="width: 100%;">
+                    <div class="modal-content">
+                        <span class="close-button" onClick="closeModal()">&times;</span>
+                        <h2 id="product-detail-name"></h2>
+                        <p id="product-detail-description"></p>
+                        <p id="product-detail-price"></p>
+                    </div>
+                </div>
+            </main>
         </div>
 
-        <div id="product-detail-modal" class="modal" style="width: 100%;">
-          <div class="modal-content">
-            <span class="close-button" onClick="closeModal()">&times;</span>
-            <h2 id="product-detail-name"></h2>
-            <p id="product-detail-description"></p>
-            <p id="product-detail-price"></p>
-          </div>
-        </div>
-      </main>
-    </div>
+        <script src="/models/cart.js"></script>
+        <script src="/models/product.js"></script>
+        <script src="/models/category.js"></script>
+        <script src="/models/profile.js"></script>
+        <script src="../main.js"></script>
 
-    <script src="/models/cart.js"></script>
-    <script src="/models/product.js"></script>
-    <script src="/models/category.js"></script>
-    <script src="/models/profile.js"></script>
-    <script src="../main.js"></script>
-
-    <footer>
-      <p>Version du site : 1.0.0</p>
-    </footer>
-  </body>
+        <footer>
+            <p>Version du site : 1.0.0</p>
+        </footer>
+    </body>
 </html>
