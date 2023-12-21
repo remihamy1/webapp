@@ -2,6 +2,7 @@ function generateProductDiv(product, reviews) {
   const productDiv = document.createElement("div");
   productDiv.className = "product-item";
   productDiv.innerHTML = `
+        <img src="${product.image ? product.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Question_mark_alternate.svg/1200px-Question_mark_alternate.svg.png"}" alt="${product.name}" />
         <h3 class="product-name">${product.name}</h3>
         <p class="product-description">${product.description}</p>
         <p class="product-price">${product.price} €</p>
@@ -98,6 +99,7 @@ function loadProductsInitial() {
             const productDiv = document.createElement("div");
             productDiv.className = "product-item";
             productDiv.innerHTML = `
+            <img src="${product.image ? product.image : "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Question_mark_alternate.svg/1200px-Question_mark_alternate.svg.png"}" alt="${product.name}" />
                         <h3 class="product-name">${product.name}</h3>
                         <p class="product-description">${
                           product.description
